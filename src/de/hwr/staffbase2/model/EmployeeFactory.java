@@ -2,6 +2,13 @@ package de.hwr.staffbase2.model;
 
 import de.hwr.staffbase2.model.implementation.EmployeeImpl;
 
+/**
+ * Factory zur Erzeugung eines Employee
+ * 
+ * @author sebastiangrosse
+ * 
+ */
+
 public class EmployeeFactory {
 	private static EmployeeFactory employeeFactory = null;
 

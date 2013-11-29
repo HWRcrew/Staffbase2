@@ -2,6 +2,13 @@ package de.hwr.staffbase2.model;
 
 import java.util.Calendar;
 
+/**
+ * Fabrik zur Erzeugung einer unabhängigen ID, die aus einem Timestamp für die
+ * Datenbank generiert wird.
+ * 
+ * @author sebastiangrosse
+ * 
+ */
 public class IdFactory {
 	private static IdFactory idFactory = null;
 

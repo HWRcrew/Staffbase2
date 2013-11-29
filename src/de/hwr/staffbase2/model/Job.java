@@ -1,5 +1,11 @@
 package de.hwr.staffbase2.model;
 
+/**
+ * Stelle mit Stellenbeschreibung und ueblichem Gehalt
+ * 
+ * @author sebastiangrosse
+ *
+ */
 public interface Job {
 	public long getId();
 

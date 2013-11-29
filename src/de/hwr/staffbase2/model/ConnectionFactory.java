@@ -4,6 +4,12 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+/**
+ * Factory, zur Erzeugung einer Verbindung mit der Datenbank
+ * 
+ * @author sebastiangrosse
+ * 
+ */
 public class ConnectionFactory {
 	// TODO Property-File for Connection
 	private static String DRIVERCLASSNAME = "com.mysql.jdbc.Driver";

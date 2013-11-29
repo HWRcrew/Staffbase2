@@ -2,6 +2,12 @@ package de.hwr.staffbase2.model;
 
 import de.hwr.staffbase2.model.implementation.EmployeeDAOImpl;
 
+/**
+ * Factory zur Erzeugung eines DAO fuer Employee (bisher nur für Datenbanken)
+ * 
+ * @author sebastiangrosse
+ * 
+ */
 public class EmployeeDAOFactory {
 	private static EmployeeDAOFactory employeeDAOFactory = null;
 

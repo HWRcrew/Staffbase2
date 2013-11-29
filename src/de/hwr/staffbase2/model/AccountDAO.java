@@ -2,6 +2,12 @@ package de.hwr.staffbase2.model;
 
 import java.util.List;
 
+/**
+ * DAO für den Zugriff auf einen Account in der Persistenzschicht
+ * 
+ * @author sebastiangrosse
+ * 
+ */
 public interface AccountDAO {
 
 	public void insert(Account account);

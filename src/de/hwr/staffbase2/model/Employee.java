@@ -1,5 +1,11 @@
 package de.hwr.staffbase2.model;
 
+/**
+ * Mitarbeiter
+ * 
+ * @author sebastiangrosse
+ *
+ */
 public interface Employee {
 	public long getId();
 

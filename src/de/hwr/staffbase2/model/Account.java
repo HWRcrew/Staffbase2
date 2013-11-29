@@ -1,7 +1,13 @@
 package de.hwr.staffbase2.model;
 
+/**
+ * Ein Nutzer-Account zur Anmeldung am System
+ * 
+ * @author sebastiangrosse
+ * 
+ */
 public interface Account {
-	
+
 	public long getId();
 
 	public void setId(long id);
