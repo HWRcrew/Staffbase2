@@ -10,7 +10,7 @@ public class JobImpl implements Job {
 	private String description;
 	private float salary;
 
-	JobImpl() {
+	public JobImpl() {
 		this.id = IdFactory.getInstance().generateID();
 	}
 
