@@ -1,43 +1,46 @@
 package de.hwr.staffbase2.model.implementation;
 
 import de.hwr.staffbase2.model.Department;
+import de.hwr.staffbase2.model.IdFactory;
 
 public class DepartmentImpl implements Department {
 
+	private long id;
+	private String name;
+	private String description;
+
+	public DepartmentImpl() {
+		this.id = IdFactory.getInstance().generateID();
+	}
+
 	@Override
 	public long getId() {
-		// TODO Auto-generated method stub
-		return 0;
+		return this.id;
 	}
 
 	@Override
 	public void setId(long id) {
-		// TODO Auto-generated method stub
-		
+		this.id = id;
 	}
 
 	@Override
 	public String getName() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.name;
 	}
 
 	@Override
 	public void setName(String name) {
-		// TODO Auto-generated method stub
-		
+		this.name = name;
 	}
 
 	@Override
 	public String getDescription() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.description;
 	}
 
 	@Override
 	public void setDescription(String description) {
-		// TODO Auto-generated method stub
-		
+		this.description = description;
 	}
 
 }
