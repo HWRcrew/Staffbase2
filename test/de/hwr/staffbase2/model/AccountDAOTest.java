@@ -9,8 +9,7 @@ public class AccountDAOTest {
 	@Test
 	public void testInsert() {
 		AccountDAO accountDAO = AccountDAOFactory.getInstance().getAccountDAO();
-		AccountFactory.getInstance();
-		Account account = AccountFactory.getAccount();
+		Account account = AccountFactory.getInstance().getAccount();
 		account.setManager(true);
 		account.setPassword("test");
 		account.setUsername("sebastian");
