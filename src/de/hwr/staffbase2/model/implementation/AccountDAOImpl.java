@@ -245,11 +245,11 @@ public class AccountDAOImpl implements AccountDAO {
 				account.setUsername(resultSet.getString("username"));
 				account.setPassword(resultSet.getString("password"));
 				account.setManager(resultSet.getBoolean("manager"));
-				if (resultSet.getInt("employee") != 0) {
+				if (resultSet.getInt("fk_employee") != 0) {
 					EmployeeDAO employeeDAO = EmployeeDAOFactory.getInstance()
 							.getEmployeeDAO();
 					Employee employee = employeeDAO.find(resultSet
-							.getInt("employee"));
+							.getInt("fk_employee"));
 					account.setEmployee(employee);
 				}
 				accounts.add(account);
