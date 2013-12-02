@@ -120,7 +120,7 @@ public class AccountDAOImpl implements AccountDAO {
 			preparedStatement.setString(1, username);
 			preparedStatement.setString(2, password);
 			resultSet = preparedStatement.executeQuery();
-			if (resultSet != null) {
+			if (resultSet != null && resultSet.next()) {
 				return find(username);
 			} else {
 				return null;
@@ -153,7 +153,7 @@ public class AccountDAOImpl implements AccountDAO {
 			preparedStatement = connection.prepareStatement(queryString);
 			preparedStatement.setString(1, username);
 			resultSet = preparedStatement.executeQuery();
-			if (resultSet != null) {
+			if (resultSet != null && resultSet.next()) {
 				Account account = AccountFactory.getInstance().getAccount();
 				account.setId(resultSet.getLong("id"));
 				account.setUsername(resultSet.getString("username"));
@@ -196,7 +196,7 @@ public class AccountDAOImpl implements AccountDAO {
 			preparedStatement = connection.prepareStatement(queryString);
 			preparedStatement.setLong(1, id);
 			resultSet = preparedStatement.executeQuery();
-			if (resultSet != null) {
+			if (resultSet != null && resultSet.next()) {
 				Account account = AccountFactory.getInstance().getAccount();
 				account.setId(id);
 				account.setUsername(resultSet.getString("username"));
