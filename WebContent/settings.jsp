@@ -82,7 +82,7 @@ a:hover, a:active, a:focus { /* Durch diese Gruppe von Selektoren wird bei Verwe
 	line-height: 0px;
 }
 .header {
-	background-color: #999;
+	background-color: #FFF;
 	text-align: center;
 	vertical-align: top;
 	display: block;
@@ -96,6 +96,18 @@ a:hover, a:active, a:focus { /* Durch diese Gruppe von Selektoren wird bei Verwe
 	border-bottom-width: 2px;
 	border-bottom-style: solid;
 }
+
+.navigationbar {
+	width: 960px;
+	background-color: #D0D0D0;
+	border-bottom: 2px solid #787878;
+	height: 50px;
+	margin-top: 0;
+	margin-right: auto;
+	margin-bottom: 0;
+	margin-left: auto;
+}
+
 #input_login {
 	vertical-align: middle;
 	display: block;
@@ -144,7 +156,24 @@ a:hover, a:active, a:focus { /* Durch diese Gruppe von Selektoren wird bei Verwe
 	border-bottom-style: none;
 	border-left-style: none;
 }
+#navigationbutton {
+	font-family: Verdana, Geneva, sans-serif;
+	font-size: 16px;
+	color: #000;
+	float: left;
+	font-weight: bold;
+	background-color: #D0D0D0;
+	height: 50px;
+	width: auto;
+	border-top-style: none;
+	border-right-style: none;
+	border-bottom-style: none;
+	border-left-style: none;
+}
+#navigationbutton:hover { background-color: #A4A4A4;}
 #button:active { background-image: url(drawable/btn_background_clicked.png);}
+
+
 
 </style></head>
 
@@ -154,11 +183,20 @@ a:hover, a:active, a:focus { /* Durch diese Gruppe von Selektoren wird bei Verwe
   <div class="header">
     <input name="logo_staffbase" type="image" src="drawable\staffbase_logo.png" />
   <!-- end .header --></div>
+  <div class="navigationbar">
+	<input id="navigationbutton" name="sign-out" type="button" value="Abmelden" style="float:right"  onclick="location.href='<%=request.getContextPath()%>/LogoutController'"/> <!-- onclick="window.location.href='login.html'" -->
+	<input id="navigationbutton" name="account" type="button" value="Konto" style="float:right; background-color: #47C824; color: #AC58FA"  />
+	<input id="navigationbutton" name="employee" type="button" value="Mitarbeiter" />
+	<input id="navigationbutton" name="department" type="button" value="Abteilung" />
+	<input id="navigationbutton" name="employee" type="button" value="Stellen" />
+  <!-- end .navigationbar --></div>
   <div class="content">
-    <form id="input_login" action="LoginController" method="post" name="login">
-   	  <center><input id="userinput" name="username" type="text" maxlength="50" placeholder="Nutzername"/></center>
-      <center><input id="userinput" name="password" type="password" maxlength="50" placeholder="Passwort"/></center>
-      <center><input id="button" name="submit" type="submit" value="Anmelden" /></center>
+    <form id="input_login" action="" method="post" name="login" target="_self">
+   	  <center><input type="text" id="userinput" maxlength="50" placeholder="Nutzername"/></center>
+      <center><input id="userinput" name="old_password" type="password" maxlength="50" placeholder="Altes Passwort"/></center>
+	  <center><input id="userinput" name="new_password" type="password" maxlength="50" placeholder="Neues Passwort"/></center>
+	  <center><input id="userinput" name="new_password_resume" type="password" maxlength="50" placeholder="Neues Passwort wiederholen"/></center>
+      <center><input id="button" name="submit" type="button" value="Speichern" /></center>
     </form>
     <!-- end .content --></div>
   <!-- end .container --></div>
