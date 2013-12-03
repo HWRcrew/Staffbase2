@@ -11,11 +11,14 @@ import java.sql.SQLException;
  * 
  */
 public class ConnectionFactory {
-	// TODO Property-File for Connection
-	private static String DRIVERCLASSNAME = "com.mysql.jdbc.Driver";
-	private static String CONNECTIONURL = "jdbc:mysql://localhost:8889/database";
-	private static String USER = "root";
-	private static String PASSWORD = "root";
+	private static String DRIVERCLASSNAME = ConfigurationReader.getInstance()
+			.read().getProperty("db.driverclassname");
+	private static String CONNECTIONURL = ConfigurationReader.getInstance()
+			.read().getProperty("db.connectionurl");
+	private static String USER = ConfigurationReader.getInstance().read()
+			.getProperty("db.user");
+	private static String PASSWORD = ConfigurationReader.getInstance().read()
+			.getProperty("db.driverclassname");;
 
 	private static ConnectionFactory connectionFactory = null;
 
