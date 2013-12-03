@@ -42,7 +42,7 @@ public class ConfigurationReader {
 	}
 
 	/**
-	 * Eigenes File
+	 * Selbst definierter InputStream
 	 * 
 	 * @param file
 	 * @return
