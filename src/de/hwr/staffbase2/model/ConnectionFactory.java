@@ -18,7 +18,7 @@ public class ConnectionFactory {
 	private static String USER = ConfigurationReader.getInstance().read()
 			.getProperty("db.user");
 	private static String PASSWORD = ConfigurationReader.getInstance().read()
-			.getProperty("db.password");;
+			.getProperty("db.password");
 
 	private static ConnectionFactory connectionFactory = null;
 
