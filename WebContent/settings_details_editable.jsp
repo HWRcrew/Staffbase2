@@ -37,7 +37,7 @@
   %>
   
   <center>
-    <form id="input_login" action="" method="post" name="login" target="_self">
+    <form id="input_login" action="EmployeeController?update=1" method="post" name="login" target="_self">
 		<label>ID </label>
 		<input type="text" id="readonly" name="_id" readonly onfocus="this.blur();" value="<%=employee.getId()%>"/><br>
 		<label>Name </label>
@@ -59,7 +59,7 @@
 			<label>Stelle </label>
 			<input type="text" id="showonlyvalues" name="_job" readonly onfocus="this.blur();" value="<%=employee.getJob()%>"/><br>
 			<!-- end .showonly --></div>
-		<input id="button_large" name="submit" type="button" onclick="location.href='<%=request.getContextPath()%>/EmployeeController?update=1'" value="Speichern" /><br>
+		<input id="button_large" name="submit" type="submit" value="Speichern" /><br>
 		<input id="button_large" name="edit" type="button" value="Konto bearbeiten" />
     </form>
     <!-- end .content --></div>
