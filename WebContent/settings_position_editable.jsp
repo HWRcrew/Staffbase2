@@ -4,6 +4,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title></title>
+
 <link href="styles/staffbase_styles.css" rel="stylesheet" type="text/css" />
 </head>
 
@@ -14,20 +15,27 @@
     <input name="logo_staffbase" type="image" src="drawable/staffbase_logo.png" />
   <!-- end .header --></div>
   <div class="navigationbar">
-	<input id="navigationbutton" name="sign-out" type="button" value="Abmelden" style="float:right"  onclick="location.href='<%=request.getContextPath()%>/LogoutController'"/> <!-- onclick="window.location.href='login.html'" -->
-	<input id="navigationbutton" name="account" type="button" value="Konto" style="float:right; background-color: #47C824; color: #AC58FA"  />
+	<input id="navigationbutton" name="sign-out" type="button" value="Abmelden" style="float:right"  /> <!-- onclick="window.location.href='login.html'" -->
+	<input id="navigationbutton" name="account" type="button" value="Konto" style="float:right; background-color: #47C824;"  />
 	<input id="navigationbutton" name="employee" type="button" value="Mitarbeiter" />
 	<input id="navigationbutton" name="department" type="button" value="Abteilung" />
 	<input id="navigationbutton" name="employee" type="button" value="Stellen" />
   <!-- end .navigationbar --></div>
   <div class="content">
+  <center>
     <form id="input_login" action="" method="post" name="login" target="_self">
-   	  <center><input type="text" id="userinput" maxlength="50" placeholder="Nutzername"/></center>
-      <center><input id="userinput" name="old_password" type="password" maxlength="50" placeholder="Altes Passwort"/></center>
-	  <center><input id="userinput" name="new_password" type="password" maxlength="50" placeholder="Neues Passwort"/></center>
-	  <center><input id="userinput" name="new_password_resume" type="password" maxlength="50" placeholder="Neues Passwort wiederholen"/></center>
-      <center><input id="button" name="submit" type="button" value="Speichern" /></center>
+		<label>ID </label>
+		<input type="text" id="readonly" name="_id" readonly onfocus="this.blur();"/><br>
+		<label>Name </label>
+		<input id="userinputvalues" name="name" type="text" maxlength="50" /><br>
+		<label>Gehalt </label>
+		<input id="userinputvalues" name="wages" type="text" maxlength="50" /><br>
+		<label>Beschreibung </label>
+		<textarea id="userinputvalues_rich" name="comments" cols="25" rows="5" ></textarea><br>
+		
+		<input id="button_large" name="submit" type="button" value="Speichern" /><br>
     </form>
+	</center>
     <!-- end .content --></div>
   <!-- end .container --></div>
 </body>

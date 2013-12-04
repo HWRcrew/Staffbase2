@@ -11,9 +11,10 @@
 
 <div class="container">
   <div class="header">
-    <input name="logo_staffbase" type="image" src="drawable\staffbase_logo.png" />
+    <input name="logo_staffbase" type="image" src="drawable/staffbase_logo.png" />
   <!-- end .header --></div>
   <div class="content">
+  <center><div style="color:red">${errorMessage}</div></center> <!-- error when user enters a false username and passwort combination-->
     <form id="input_login" action="LoginController" method="post" name="login">
    	  <center><input id="userinput" name="username" type="text" maxlength="50" placeholder="Nutzername"/></center>
       <center><input id="userinput" name="password" type="password" maxlength="50" placeholder="Passwort"/></center>

@@ -39,7 +39,7 @@ a:hover, a:active, a:focus { /* Durch diese Gruppe von Selektoren wird bei Verwe
 .container {
 	width: 960px;
 	background-color: #FFF; /* Der mit der Breite gekoppelte automatische Wert an den Seiten zentriert das Layout. */
-	border: 2px solid #000;
+	border: 1px solid #000;
 	height: 900px;
 	margin-top: 0;
 	margin-right: auto;
@@ -90,9 +90,25 @@ a:hover, a:active, a:focus { /* Durch diese Gruppe von Selektoren wird bei Verwe
 	border-bottom-style: solid;
 }
 .showonly {
-	width: 380;
+	width: 400px;
+	height: 190px;
 	background-color: #C0C0C0;
 	border-radius: 10px;
+}
+.bg {
+	height: 22px;
+	width: 240px;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 15px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	padding-top: 3px;
+	padding-right: 5px;
+	padding-bottom: 3px;
+	padding-left: 5px;
+	text-align: center;
+	border-radius: 10px;
+	border: 2px solid #C0C0C0;
 }
 #input_login {
 	vertical-align: middle;
@@ -112,8 +128,8 @@ a:hover, a:active, a:focus { /* Durch diese Gruppe von Selektoren wird bei Verwe
 #userinput {
 	height: 32px;
 	width: 256px;
-	font-family: "Courier New", Courier, monospace;
-	font-size: 12px;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 15px;
 	margin-top: 10px;
 	margin-bottom: 10px;
 	padding-top: 3px;
@@ -128,8 +144,24 @@ a:hover, a:active, a:focus { /* Durch diese Gruppe von Selektoren wird bei Verwe
 #userinputvalues {
 	height: 32px;
 	width: 256px;
-	font-family: "Courier New", Courier, monospace;
-	font-size: 12px;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 15px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	padding-top: 3px;
+	padding-right: 5px;
+	padding-bottom: 3px;
+	padding-left: 5px;
+	text-align: center;
+	border-radius: 10px;
+	border: 2px solid #C0C0C0;
+	background-color: #DDD;
+}
+#userinputvalues_rich {
+	height: 128px;
+	width: 256px;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 15px;
 	margin-top: 10px;
 	margin-bottom: 10px;
 	padding-top: 3px;
@@ -144,8 +176,9 @@ a:hover, a:active, a:focus { /* Durch diese Gruppe von Selektoren wird bei Verwe
 #showonlyvalues {
 	height: 32px;
 	width: 256px;
-	font-family: "Courier New", Courier, monospace;
-	font-size: 12px;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 15px;
+	font-style: italic;
 	margin-top: 10px;
 	margin-bottom: 10px;
 	padding-top: 3px;
@@ -160,9 +193,10 @@ a:hover, a:active, a:focus { /* Durch diese Gruppe von Selektoren wird bei Verwe
 #readonly {
 	height: 32px;
 	width: 256px;
-	font-family: "Courier New", Courier, monospace;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 15px;
+	font-style: italic;
 	background-color: #C0C0C0;
-	font-size: 12px;
 	margin-top: 10px;
 	margin-bottom: 10px;
 	padding-top: 3px;
@@ -178,9 +212,9 @@ a:hover, a:active, a:focus { /* Durch diese Gruppe von Selektoren wird bei Verwe
 	width: 164px;
 	border-radius: 10px;
 	border: 2px solid #C0C0C0;
-	font-family: "Courier New", Courier, monospace;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 15px;
 	font-style: italic;
-	font-size: 12px;
 	float: center;
 	margin-top: 10px;
 	margin-bottom: 10px;
@@ -193,6 +227,8 @@ a:hover, a:active, a:focus { /* Durch diese Gruppe von Selektoren wird bei Verwe
 #button {
 	background-color: #00FF00;
 	border-radius: 12px;
+	-moz-border-radius: 12px;
+	-webkit-border-radius: 12px;
 	border-color: #C0C0C0;
 	color: #000;
 	margin: 10px;
@@ -209,11 +245,13 @@ a:hover, a:active, a:focus { /* Durch diese Gruppe von Selektoren wird bei Verwe
 	margin: 12px;
 }
 #button:hover {
-	background-color: #2EFE2E;
+	background-color: #47C824;
 }
 #button_large {
 	background-color: #00FF00;
 	border-radius: 12px;
+	-moz-border-radius: 12px;
+	-webkit-border-radius: 12px;
 	border-color: #C0C0C0;
 	color: #000;
 	margin: 10px;
@@ -230,10 +268,10 @@ a:hover, a:active, a:focus { /* Durch diese Gruppe von Selektoren wird bei Verwe
 	margin: 11px;
 }
 #button_large:hover {
-	background-color: #2EFE2E;
+	background-color: #47C824;
 }
 #button_edit {
-	font-family: Verdana, Geneva, sans-serif;
+	font-family: Arial, Helvetica, sans-serif;
 	font-style: italic;
 	color: #000;
 	background-color: #C0C0C0;
@@ -241,6 +279,8 @@ a:hover, a:active, a:focus { /* Durch diese Gruppe von Selektoren wird bei Verwe
 	height: 32px;
 	width: 120px;
 	border-radius: 10px;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
 }
 #button_edit:active { 
 	border:none;
@@ -262,7 +302,7 @@ a:hover, a:active, a:focus { /* Durch diese Gruppe von Selektoren wird bei Verwe
 	margin-left: auto;
 }
 #navigationbutton {
-	font-family: Verdana, Geneva, sans-serif;
+	font-family: Arial, Helvetica, sans-serif;
 	font-size: 16px;
 	color: #000;
 	float: left;
@@ -295,8 +335,10 @@ a:hover, a:active, a:focus { /* Durch diese Gruppe von Selektoren wird bei Verwe
 }
 label {
     display: inline-block;
-    vertical-align: baseline;
-    width: 100px;
+	vertical-align: top;
+	margin-top: 15px;
+    width: 115px;
+	text-align: right;
 	font-weight: bold;
 }
 bottom {

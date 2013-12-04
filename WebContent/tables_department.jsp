@@ -17,8 +17,8 @@
   <div class="navigationbar">
 	<input id="navigationbutton" name="sign-out" type="button" value="Abmelden" style="float:right"  /> <!-- onclick="window.location.href='login.html'" -->
 	<input id="navigationbutton" name="account" type="button" value="Konto" style="float:right; background-color: #47C824;"  />
-    <input id="navigationbutton" name="employee" type="button" value="Mitarbeiter" style="color: #AC58FA"/>
-	<input id="navigationbutton" name="department" type="button" value="Abteilung" />
+	<input id="navigationbutton" name="employee" type="button" value="Mitarbeiter" />
+	<input id="navigationbutton" name="department" type="button" value="Abteilung" style="color: #AC58FA"/>
 	<input id="navigationbutton" name="employee" type="button" value="Stellen" />
   <!-- end .navigationbar --></div>
   <div class="content">
@@ -26,33 +26,25 @@
      <table border="0">
 	 <th>ID</th>
 	 <th>Name</th>
-     <th>Vorname</th>
-	 <th>Monatsgehalt</th>
 	  <tr>
-		<td><input id="readonly_small" type="text" readonly onfocus="this.blur();"/></td>
-		<td><input id="readonly_small" type="text" readonly onfocus="this.blur();"/></td>
-        <td><input id="readonly_small" type="text" readonly onfocus="this.blur();"/></td>
-        <td><input id="readonly_small" type="text" readonly onfocus="this.blur();"/></td>
+		<td><input id="userinput" type="text" onfocus="this.blur();" /></td>
+		<td><input id="userinput" type="text" onfocus="this.blur();"/></td>
 		<td><input id="button_edit" type="button" value="Bearbeiten" /></td>
 	  </tr>
 	  <tr>
-		<td><input id="readonly_small" type="text" readonly onfocus="this.blur();"/></td>
-		<td><input id="readonly_small" type="text" readonly onfocus="this.blur();"/></td>
-        <td><input id="readonly_small" type="text" readonly onfocus="this.blur();"/></td>
-		<td><input id="readonly_small" type="text" readonly onfocus="this.blur();"/></td>
+		<td><input id="userinput" type="text" onfocus="this.blur();"/></td>
+		<td><input id="userinput" type="text" onfocus="this.blur();"/></td>
 		<td><input id="button_edit" type="button" value="Bearbeiten" /></td>
 	  </tr>
 	  <tr>
-		<td><input id="readonly_small" type="text" readonly onfocus="this.blur();"/></td>
-		<td><input id="readonly_small" type="text" readonly onfocus="this.blur();"/></td>
-        <td><input id="readonly_small" type="text" readonly onfocus="this.blur();"/></td>
-		<td><input id="readonly_small" type="text" readonly onfocus="this.blur();"/></td>
+		<td><input id="userinput" type="text" onfocus="this.blur();"/></td>
+		<td><input id="userinput" type="text" onfocus="this.blur();"/></td>
 		<td><input id="button_edit" type="button" value="Bearbeiten" /></td>
 	  </tr>
   </table>
 	</center>
-    <bottom>
-    <input id="button" name="new_employsee" type="button" value="Neuer Mitarbeiter"/>
+	<bottom>
+    <input id="button" name="new_department" type="button" value="Neue Abteilung"/>
     </bottom>
     <!-- end .content --></div>
   <!-- end .container --></div>
