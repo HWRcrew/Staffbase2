@@ -10,6 +10,8 @@ public class ConfigurationReaderTest {
 
 	@Test
 	public void testRead() {
+		Properties propertiesReal = ConfigurationReader.getInstance().read();
+		assertEquals(propertiesReal != null, true);
 		Properties properties = ConfigurationReader.getInstance().read(
 				getClass().getResourceAsStream("test.properties"));
 		assertEquals("com.mysql.jdbc.Driver",
@@ -18,5 +20,6 @@ public class ConfigurationReaderTest {
 				properties.getProperty("db.connectionurl"));
 		assertEquals("root", properties.getProperty("db.user"));
 		assertEquals("root", properties.getProperty("db.password"));
+
 	}
 }

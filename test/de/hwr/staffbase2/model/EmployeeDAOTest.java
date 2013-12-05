@@ -28,6 +28,13 @@ public class EmployeeDAOTest {
 
 	@Test
 	public void testFindLong() {
+		Employee employee = EmployeeFactory.getInstance().getEmployee();
+		employee.setPrename("Harald");
+		employee.setSurname("Müller");
+		employee.setSalary(3000);
+		EmployeeDAO employeeDAO = EmployeeDAOFactory.getInstance().getEmployeeDAO();
+		employeeDAO.insert(employee);
+		employeeDAO.find(employee.getId()).toString();
 		fail("Not yet implemented");
 	}
 

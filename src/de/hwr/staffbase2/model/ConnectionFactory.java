@@ -11,7 +11,8 @@ import java.sql.SQLException;
  * 
  */
 public class ConnectionFactory {
-	private static String DRIVERCLASSNAME = ConfigurationReader.getInstance()
+
+	static private String DRIVERCLASSNAME = ConfigurationReader.getInstance()
 			.read().getProperty("db.driverclassname");
 	private static String CONNECTIONURL = ConfigurationReader.getInstance()
 			.read().getProperty("db.connectionurl");

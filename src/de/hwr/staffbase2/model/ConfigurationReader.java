@@ -6,7 +6,7 @@ import java.io.InputStream;
 import java.util.Properties;
 
 /**
- * Zum Lesen der Konfiguration Konfiguration kann nicht zur Laufzeit veraendert
+ * Zum Lesen der Konfiguration - Die Konfiguration kann nicht zur Laufzeit veraendert
  * werden
  * 
  * @author sebastiangrosse
@@ -24,18 +24,52 @@ public class ConfigurationReader {
 	}
 
 	/**
-	 * Fest definiertes File
+	 * Lesen der Properties aus configuration.properties - Staffbase_CONF als
+	 * Umgebungsvariable erforderlich => Neustart des OS erforderlich
 	 * 
-	 * @return
+	 * @return Properties
 	 */
 	public Properties read() {
 		if (properties == null) {
+			properties = new Properties();
 			try {
-				properties = new Properties();
-				properties
-						.load(new FileInputStream("configuration.properties"));
-			} catch (IOException e) {
-				e.printStackTrace();
+
+				/*
+				 * Laden der configuration aus Information in
+				 * catalina.properties shared.loader=Pfad zum Verzeichnis mit
+				 * der configuration.properties Datei
+				 */
+				InputStream inputStream = Thread.currentThread()
+						.getContextClassLoader()
+						.getResourceAsStream("configuration.properties");
+				if (inputStream != null) {
+					properties.load(inputStream);
+				}
+				/*
+				 * Falls das nicht funktioniert hat wird versucht über eine zu
+				 * konfigurierende Umgebungsvariable Zugriff zu nehmen. Dafür
+				 * muss die Variable Staffbase_CONF den absoluten Pfad enthalten
+				 */
+				if (properties == null) {
+					String configuration = System.getenv("Staffbase_CONF");
+					if (configuration != null) {
+						FileInputStream fileInputStream = new FileInputStream(
+								configuration);
+						properties.load(fileInputStream);
+						System.out.println(configuration + " from environment");
+					}
+					if (properties == null) {
+						/*
+						 * Im letzten Fall wird die configuration.properties aus
+						 * Staffbase2 geladen, dies dient zum Test des Readers
+						 */
+						properties.load(new FileInputStream(
+								"configuration.properties"));
+						System.out.println("from source");
+					}
+				}
+			} catch (IOException ioe) {
+				ioe.printStackTrace();
 			}
 		}
 		return properties;
@@ -44,8 +78,8 @@ public class ConfigurationReader {
 	/**
 	 * Selbst definierter InputStream
 	 * 
-	 * @param file
-	 * @return
+	 * @param inputStream
+	 * @return Properties
 	 */
 	public Properties read(InputStream inputStream) {
 		if (properties == null) {
