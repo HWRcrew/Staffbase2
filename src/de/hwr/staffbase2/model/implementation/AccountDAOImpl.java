@@ -21,67 +21,75 @@ public class AccountDAOImpl implements AccountDAO {
 	ResultSet resultSet = null;
 
 	@Override
-	public void insert(Account account) {
-		try {
-			String queryString = "INSERT INTO account(id, username, password, manager, fk_employee) VALUES(?,?,md5(?),?,?);";
-			connection = ConnectionFactory.getInstance().getConnection();
-			preparedStatement = connection.prepareStatement(queryString);
-			preparedStatement.setLong(1, account.getId());
-			preparedStatement.setString(2, account.getUsername());
-			preparedStatement.setString(3, account.getPassword());
-			preparedStatement.setBoolean(4, account.isManager());
-			if (account.getEmployee() != null) {
-				preparedStatement.setLong(5, account.getEmployee().getId());
-			} else {
-				preparedStatement.setLong(5, 0);
-			}
-			preparedStatement.executeUpdate();
-			System.out.println("Insert complete!");
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
+	public boolean insert(Account account) {
+		if (find(account.getUsername()) != null) {
 			try {
-				if (preparedStatement != null) {
-					preparedStatement.close();
+				String queryString = "INSERT INTO account(id, username, password, manager, fk_employee) VALUES(?,?,md5(?),?,?);";
+				connection = ConnectionFactory.getInstance().getConnection();
+				preparedStatement = connection.prepareStatement(queryString);
+				preparedStatement.setLong(1, account.getId());
+				preparedStatement.setString(2, account.getUsername());
+				preparedStatement.setString(3, account.getPassword());
+				preparedStatement.setBoolean(4, account.isManager());
+				if (account.getEmployee() != null) {
+					preparedStatement.setLong(5, account.getEmployee().getId());
+				} else {
+					preparedStatement.setLong(5, 0);
 				}
-				if (connection != null) {
-					connection.close();
-				}
+				preparedStatement.executeUpdate();
+				System.out.println("Insert complete!");
 			} catch (SQLException e) {
 				e.printStackTrace();
+			} finally {
+				try {
+					if (preparedStatement != null) {
+						preparedStatement.close();
+					}
+					if (connection != null) {
+						connection.close();
+					}
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
 			}
+			return true;
 		}
+		return false;
 	}
 
 	@Override
-	public void update(Account account) {
-		try {
-			String queryString = "UPDATE account SET username=?, password=md5(?), manager=?, fk_employee=? WHERE id=?;";
-			connection = ConnectionFactory.getInstance().getConnection();
-			preparedStatement = connection.prepareStatement(queryString);
-			preparedStatement.setString(1, account.getUsername());
-			preparedStatement.setString(2, account.getPassword());
-			preparedStatement.setBoolean(3, account.isManager());
-			if (account.getEmployee() != null) {
-				preparedStatement.setLong(4, account.getEmployee().getId());
-			} else {
-				preparedStatement.setLong(4, 0);
-			}
-			preparedStatement.setLong(5, account.getId());
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
+	public boolean update(Account account) {
+		if (find(account.getUsername()) != null) {
 			try {
-				if (preparedStatement != null) {
-					preparedStatement.close();
+				String queryString = "UPDATE account SET username=?, password=md5(?), manager=?, fk_employee=? WHERE id=?;";
+				connection = ConnectionFactory.getInstance().getConnection();
+				preparedStatement = connection.prepareStatement(queryString);
+				preparedStatement.setString(1, account.getUsername());
+				preparedStatement.setString(2, account.getPassword());
+				preparedStatement.setBoolean(3, account.isManager());
+				if (account.getEmployee() != null) {
+					preparedStatement.setLong(4, account.getEmployee().getId());
+				} else {
+					preparedStatement.setLong(4, 0);
 				}
-				if (connection != null) {
-					connection.close();
-				}
+				preparedStatement.setLong(5, account.getId());
 			} catch (SQLException e) {
 				e.printStackTrace();
+			} finally {
+				try {
+					if (preparedStatement != null) {
+						preparedStatement.close();
+					}
+					if (connection != null) {
+						connection.close();
+					}
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
 			}
+			return true;
 		}
+		return false;
 	}
 
 	@Override

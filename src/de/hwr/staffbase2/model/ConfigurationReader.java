@@ -39,7 +39,6 @@ public class ConfigurationReader {
 				InputStream inputStream = Thread.currentThread()
 						.getContextClassLoader()
 						.getResourceAsStream("configuration.properties");
-				System.out.println("inputStream " + inputStream);
 				if (inputStream != null) {
 					properties = new Properties();
 					properties.load(inputStream);
@@ -68,7 +67,6 @@ public class ConfigurationReader {
 					properties = new Properties();
 					properties.load(new FileInputStream(
 							"configuration.properties"));
-					System.out.println("from source");
 				}
 			} catch (IOException ioe) {
 				ioe.printStackTrace();

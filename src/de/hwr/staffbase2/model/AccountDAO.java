@@ -10,9 +10,9 @@ import java.util.List;
  */
 public interface AccountDAO {
 
-	public void insert(Account account);
+	public boolean insert(Account account);
 
-	public void update(Account account);
+	public boolean update(Account account);
 
 	public void delete(Account account);
 

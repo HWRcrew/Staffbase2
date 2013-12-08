@@ -56,7 +56,8 @@ public class JobDAOImpl implements JobDAO {
 			preparedStatement.setString(1, job.getName());
 			preparedStatement.setString(2, job.getDescription());
 			preparedStatement.setFloat(3, job.getSalary());
-			preparedStatement.setLong(5, job.getId());
+			preparedStatement.setLong(4, job.getId());
+			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -145,7 +146,7 @@ public class JobDAOImpl implements JobDAO {
 			preparedStatement = connection.prepareStatement(queryString);
 			preparedStatement.setLong(1, id);
 			resultSet = preparedStatement.executeQuery();
-			if (resultSet != null) {
+			if (resultSet.next()) {
 				Job job= JobFactory.getInstance().getJob();
 				job.setId(id);
 				job.setName(resultSet.getString("name"));

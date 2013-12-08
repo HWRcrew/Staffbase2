@@ -212,7 +212,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 			preparedStatement = connection.prepareStatement(queryString);
 			preparedStatement.setLong(1, id);
 			resultSet = preparedStatement.executeQuery();
-			if (resultSet != null && resultSet.next()) {
+			if (resultSet.next()) {
 				EmployeeFactory.getInstance();
 				Employee employee = EmployeeFactory.getInstance().getEmployee();
 				employee.setId(resultSet.getLong("id"));
@@ -273,7 +273,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 			preparedStatement = connection.prepareStatement(queryString);
 			preparedStatement.setLong(1, id);
 			resultSet = preparedStatement.executeQuery();
-			if (resultSet != null) {
+			if (resultSet.next()) {
 				Employee employee = EmployeeFactory.getInstance().getEmployee();
 				employee.setId(resultSet.getLong("id"));
 				employee.setPrename(resultSet.getString("prename"));

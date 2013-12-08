@@ -49,12 +49,13 @@ public class DepartmentDAOImpl implements DepartmentDAO {
 	@Override
 	public void update(Department department) {
 		try {
-			String queryString = "UPDATE department SET name=?, description=?, WHERE id=?;";
+			String queryString = "UPDATE department SET name=?, description=? WHERE id=?;";
 			connection = ConnectionFactory.getInstance().getConnection();
 			preparedStatement = connection.prepareStatement(queryString);
 			preparedStatement.setString(1, department.getName());
 			preparedStatement.setString(2, department.getDescription());
-			preparedStatement.setLong(5, department.getId());
+			preparedStatement.setLong(3, department.getId());
+			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -141,7 +142,7 @@ public class DepartmentDAOImpl implements DepartmentDAO {
 			preparedStatement = connection.prepareStatement(queryString);
 			preparedStatement.setLong(1, id);
 			resultSet = preparedStatement.executeQuery();
-			if (resultSet != null) {
+			if (resultSet.next()) {
 				Department department = DepartmentFactory.getInstance()
 						.getDepartment();
 				department.setId(id);

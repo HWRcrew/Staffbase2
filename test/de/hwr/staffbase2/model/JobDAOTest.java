@@ -6,13 +6,18 @@ import java.util.List;
 
 import org.junit.Test;
 
+/**
+ * Test fuer JobDAO
+ * 
+ * @author sebastiangrosse
+ * 
+ */
 public class JobDAOTest {
 
 	@Test
 	public void testInsertAndFindById() {
 		Job job = JobFactory.getInstance().getJob();
 		job.setName("Entwickler");
-		System.out.println(job.getName());
 		job.setSalary(4125);
 		job.setDescription("Stelle eines Entwickler. Entwickler sind für die Programmierung und das logische Design der Software verantwortlich.");
 		JobDAO jobDAO = JobDAOFactory.getInstance().getJobDAO();
@@ -33,7 +38,7 @@ public class JobDAOTest {
 		JobDAO jobDAO = JobDAOFactory.getInstance().getJobDAO();
 		jobDAO.insert(job);
 
-		// Job erhält neue Parameter
+		// Job erhält neue Werte
 		job.setName("Developer");
 		job.setDescription("A Developer.");
 		job.setSalary(4394);
@@ -41,18 +46,18 @@ public class JobDAOTest {
 		jobDAO.update(job);
 		assertEquals("Developer", jobDAO.find(job.getId()).getName());
 		assertEquals("A Developer.", jobDAO.find(job.getId()).getDescription());
-		assertEquals(4125, jobDAO.find(job.getId()).getSalary(), 0);
+		assertEquals(4394, jobDAO.find(job.getId()).getSalary(), 0);
 	}
 
 	@Test
 	public void testDelete() {
 		Job job = JobFactory.getInstance().getJob();
-		job.setName("Entwickler");
-		job.setSalary(4125);
-		job.setDescription("Stelle eines Entwickler. Entwickler sind für die Programmierung und das logische Design der Software verantwortlich.");
 		JobDAO jobDAO = JobDAOFactory.getInstance().getJobDAO();
+		// Insert
 		jobDAO.insert(job);
+		// Delete
 		jobDAO.delete(job);
+		// Test ob Id in DB
 		assertNull(jobDAO.find(job.getId()));
 	}
 
@@ -62,8 +67,15 @@ public class JobDAOTest {
 		Job job = JobFactory.getInstance().getJob();
 		job.setName("Entwickler");
 		job.setSalary(4125);
+		jobDAO.insert(job);
 		List<Job> jobs = jobDAO.find();
-		// Teste ob Job in mit id in der Liste
-		assertTrue(jobs.contains(job.getId()));
+		// Teste ob Job mit id in der Liste ist
+		boolean test = false;
+		for (int i = 0; i < jobs.size(); i++) {
+			if (jobs.get(i).getId() == job.getId()) {
+				test = true;
+			}
+		}
+		assertTrue(test);
 	}
 }
