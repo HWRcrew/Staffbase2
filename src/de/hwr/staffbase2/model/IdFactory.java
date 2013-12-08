@@ -24,9 +24,24 @@ public class IdFactory {
 			date = "0".concat(date);
 		}
 		String hour = now.get(Calendar.HOUR_OF_DAY) + "";
+		if (hour.length() != 2) {
+			hour = "0".concat(hour);
+		}
 		String minute = now.get(Calendar.MINUTE) + "";
+		if (minute.length() != 2) {
+			minute = "0".concat(minute);
+		}
 		String second = now.get(Calendar.SECOND) + "";
+		if (second.length() == 1) {
+			second = "0".concat(second);
+		}
 		String millisecond = now.get(Calendar.MILLISECOND) + "";
+		if (millisecond.length() == 1) {
+			millisecond = "00".concat(millisecond);
+		}
+		if (millisecond.length() == 2) {
+			millisecond = "0".concat(millisecond);
+		}
 		String idString = new String(year + month + date + hour + minute
 				+ second + millisecond);
 		long id = Long.parseLong(idString);

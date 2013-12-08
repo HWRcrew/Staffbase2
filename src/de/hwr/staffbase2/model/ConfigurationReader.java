@@ -6,8 +6,8 @@ import java.io.InputStream;
 import java.util.Properties;
 
 /**
- * Zum Lesen der Konfiguration - Die Konfiguration kann nicht zur Laufzeit veraendert
- * werden
+ * Zum Lesen der Konfiguration - Die Konfiguration kann nicht zur Laufzeit
+ * veraendert werden
  * 
  * @author sebastiangrosse
  * 
@@ -24,16 +24,13 @@ public class ConfigurationReader {
 	}
 
 	/**
-	 * Lesen der Properties aus configuration.properties - Staffbase_CONF als
-	 * Umgebungsvariable erforderlich => Neustart des OS erforderlich
+	 * Lesen der Properties aus configuration.properties
 	 * 
 	 * @return Properties
 	 */
 	public Properties read() {
 		if (properties == null) {
-			properties = new Properties();
 			try {
-
 				/*
 				 * Laden der configuration aus Information in
 				 * catalina.properties shared.loader=Pfad zum Verzeichnis mit
@@ -42,7 +39,9 @@ public class ConfigurationReader {
 				InputStream inputStream = Thread.currentThread()
 						.getContextClassLoader()
 						.getResourceAsStream("configuration.properties");
+				System.out.println("inputStream " + inputStream);
 				if (inputStream != null) {
+					properties = new Properties();
 					properties.load(inputStream);
 				}
 				/*
@@ -55,18 +54,21 @@ public class ConfigurationReader {
 					if (configuration != null) {
 						FileInputStream fileInputStream = new FileInputStream(
 								configuration);
-						properties.load(fileInputStream);
-						System.out.println(configuration + " from environment");
+						if (fileInputStream != null) {
+							properties = new Properties();
+							properties.load(fileInputStream);
+						}
 					}
-					if (properties == null) {
-						/*
-						 * Im letzten Fall wird die configuration.properties aus
-						 * Staffbase2 geladen, dies dient zum Test des Readers
-						 */
-						properties.load(new FileInputStream(
-								"configuration.properties"));
-						System.out.println("from source");
-					}
+				}
+				if (properties == null) {
+					/*
+					 * Im letzten Fall wird die configuration.properties aus
+					 * Staffbase2 geladen, dies dient zum Test des Readers
+					 */
+					properties = new Properties();
+					properties.load(new FileInputStream(
+							"configuration.properties"));
+					System.out.println("from source");
 				}
 			} catch (IOException ioe) {
 				ioe.printStackTrace();
