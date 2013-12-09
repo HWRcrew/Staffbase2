@@ -2,6 +2,8 @@ package de.hwr.staffbase2.model;
 
 import static org.junit.Assert.*;
 
+import java.util.List;
+
 import org.junit.Test;
 
 /**
@@ -26,6 +28,7 @@ public class AccountDAOTest {
 				.isManager());
 		assertEquals(account.getUsername(), accountDAO.find(account.getId())
 				.getUsername());
+		accountDAO.delete(account);
 	}
 
 	@Test
@@ -45,7 +48,7 @@ public class AccountDAOTest {
 		assertEquals("leroyhöbold", accountDAO.find(account.getId())
 				.getUsername());
 		assertEquals(false, accountDAO.find(account.getId()).isManager());
-
+		accountDAO.delete(account);
 	}
 
 	@Test
@@ -74,13 +77,42 @@ public class AccountDAOTest {
 
 	@Test
 	public void testInsertAndFindByUsername() {
-		fail("Not yet implemented");
+		Account account = AccountFactory.getInstance().getAccount();
+		account.setUsername("sebastian123");
+		account.setPassword("testpassword");
+		AccountDAO accountDAO = AccountDAOFactory.getInstance().getAccountDAO();
+		accountDAO.insert(account);
+		// Test ob in DB vorhanden
+		assertNotNull(accountDAO.find(account.getUsername()));
+		accountDAO.delete(account);
 	}
 
 	@Test
 	public void testInsertAndFindAll() {
-		
-		fail("Not yet implemented");
+		Account account = AccountFactory.getInstance().getAccount();
+		account.setUsername("sebastian123");
+		account.setPassword("testpassword");
+		Account account2 = AccountFactory.getInstance().getAccount();
+		account2.setUsername("sebastian1234");
+		account2.setPassword("testpassword2");
+		AccountDAO accountDAO = AccountDAOFactory.getInstance().getAccountDAO();
+		accountDAO.insert(account);
+		accountDAO.insert(account2);
+		List<Account> accounts = accountDAO.find();
+		boolean test = false;
+		boolean test2 = false;
+		for (int i = 0; i < accounts.size(); i++) {
+			if (accounts.get(i).getId() == account.getId()) {
+				test = true;
+			}
+			if (accounts.get(i).getId() == account2.getId()) {
+				test2 = true;
+			}
+		}
+		accountDAO.delete(account);
+		accountDAO.delete(account2);
+		assertTrue(test);
+		assertTrue(test2);
 	}
 
 }

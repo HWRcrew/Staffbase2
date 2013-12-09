@@ -67,15 +67,24 @@ public class JobDAOTest {
 		Job job = JobFactory.getInstance().getJob();
 		job.setName("Entwickler");
 		job.setSalary(4125);
+		Job job2 = JobFactory.getInstance().getJob();
+		job2.setName("Verkäufer");
+		job2.setSalary(1234);
 		jobDAO.insert(job);
+		jobDAO.insert(job2);
 		List<Job> jobs = jobDAO.find();
 		// Teste ob Job mit id in der Liste ist
 		boolean test = false;
+		boolean test2 = false;
 		for (int i = 0; i < jobs.size(); i++) {
 			if (jobs.get(i).getId() == job.getId()) {
 				test = true;
 			}
+			if (jobs.get(i).getId() == job2.getId()) {
+				test2 = true;
+			}
 		}
 		assertTrue(test);
+		assertTrue(test2);
 	}
 }
