@@ -26,7 +26,8 @@ public class EmployeeController extends HttpServlet {
      */
 	
 	private void handle(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-
+		request.setCharacterEncoding("UTF-8");
+		
 		RequestDispatcher dispatcher = null;
 		String change = request.getParameter("change");
 		String update = request.getParameter("update");
@@ -37,22 +38,24 @@ public class EmployeeController extends HttpServlet {
 		}else if("1".equalsIgnoreCase(update)){
 			
 			String name = request.getParameter("name");
-			System.out.println(name);
-			Long id = Long.parseLong(request.getParameter("_id"));
+			String idstring = request.getParameter("_id");
+			long id = Long.parseLong(idstring);
+			System.out.println(id);
 			String prename = request.getParameter("prename");
 			String street = request.getParameter("street");
 			int zipcode = Integer.parseInt(request.getParameter("zipcode"));
 			String city = request.getParameter("city");
 			
-			Employee employee = EmployeeFactory.getInstance().getEmployee();
-			employee.setId(id);
+			EmployeeDAO employeeDAO = EmployeeDAOFactory.getInstance().getEmployeeDAO();
+			Employee employee = employeeDAO.find(id);
+			System.out.println(employee.getSalary());
+			
 			employee.setSurname(name);
 			employee.setPrename(prename);
 			employee.setStreet(street);
 			employee.setZipcode(zipcode);
 			employee.setCity(city);
 
-			EmployeeDAO employeeDAO = EmployeeDAOFactory.getInstance().getEmployeeDAO();
 			employeeDAO.update(employee);
 			
 			dispatcher = getServletContext().getRequestDispatcher("/settings_details_editable.jsp");
