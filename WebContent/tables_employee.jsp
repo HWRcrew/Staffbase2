@@ -20,7 +20,7 @@
     <input name="logo_staffbase" type="image" src="drawable/staffbase_logo.png" />
   <!-- end .header --></div>
   <div class="navigationbar">
-	<input id="navigationbutton" name="sign-out" type="button" value="Abmelden" style="float:right"  /> <!-- onclick="window.location.href='login.html'" -->
+	<input id="navigationbutton" name="sign-out" type="button" value="Abmelden" style="float:right"  onclick="location.href='<%=request.getContextPath()%>/LogoutController'" /> <!-- onclick="window.location.href='login.html'" -->
 	<input id="navigationbutton" name="account" type="button" value="Konto" style="float:right; background-color: #47C824;"  />
     <input id="navigationbutton" name="employee" type="button" value="Mitarbeiter" style="color: #AC58FA"/>
 	<input id="navigationbutton" name="department" type="button" value="Abteilung" />
@@ -56,7 +56,7 @@
   </table>
 	</center>
     <bottom>
-    <input id="button" name="new_employsee" type="button" value="Neuer Mitarbeiter"/>
+    <input id="button" name="new_employsee" type="button" value="Neuer Mitarbeiter" onclick="location.href='<%=request.getContextPath()%>/EmployeeController?insert=1'"/>
     </bottom>
     <!-- end .content --></div>
   <!-- end .container --></div>

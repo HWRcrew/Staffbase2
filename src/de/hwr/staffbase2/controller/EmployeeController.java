@@ -31,38 +31,47 @@ public class EmployeeController extends HttpServlet {
 		RequestDispatcher dispatcher = null;
 		String change = request.getParameter("change");
 		String update = request.getParameter("update");
+		boolean manager = (Boolean) request.getSession().getAttribute("manager");
 		
-		if(change != null){
-			dispatcher = getServletContext().getRequestDispatcher("/settings_details_editable.jsp");
-			
-		}else if("1".equalsIgnoreCase(update)){
-			
-			String name = request.getParameter("name");
-			String idstring = request.getParameter("_id");
-			long id = Long.parseLong(idstring);
-			System.out.println(id);
-			String prename = request.getParameter("prename");
-			String street = request.getParameter("street");
-			int zipcode = Integer.parseInt(request.getParameter("zipcode"));
-			String city = request.getParameter("city");
-			
-			EmployeeDAO employeeDAO = EmployeeDAOFactory.getInstance().getEmployeeDAO();
-			Employee employee = employeeDAO.find(id);
-			System.out.println(employee.getSalary());
-			
-			employee.setSurname(name);
-			employee.setPrename(prename);
-			employee.setStreet(street);
-			employee.setZipcode(zipcode);
-			employee.setCity(city);
-
-			employeeDAO.update(employee);
-			
-			dispatcher = getServletContext().getRequestDispatcher("/settings_details_editable.jsp");
-			
+		
+				
+		if("1".equalsIgnoreCase(update)){
+				
+				String name = request.getParameter("name");
+				String idstring = request.getParameter("id");
+				long id = Long.parseLong(idstring);
+				String prename = request.getParameter("prename");
+				String street = request.getParameter("street");
+				int zipcode = Integer.parseInt(request.getParameter("zipcode"));
+				String city = request.getParameter("city");
+				
+				EmployeeDAO employeeDAO = EmployeeDAOFactory.getInstance().getEmployeeDAO();
+				Employee employee = employeeDAO.find(id);
+				
+				employee.setSurname(name);
+				employee.setPrename(prename);
+				employee.setStreet(street);
+				employee.setZipcode(zipcode);
+				employee.setCity(city);
+	
+				employeeDAO.update(employee);
+				
+				dispatcher = getServletContext().getRequestDispatcher("/EmployeeController?change="+id);
+				
+			}else{
+				
+				dispatcher = getServletContext().getRequestDispatcher("/tables_employee.jsp");
+			}
+		
+		
+		if(manager){
+			if(change != null){
+				dispatcher = getServletContext().getRequestDispatcher("/settings_details_editable.jsp");
+			}
 		}else{
-			
-			dispatcher = getServletContext().getRequestDispatcher("/tables_employee.jsp");
+			if(change != null){
+				dispatcher = getServletContext().getRequestDispatcher("/settings_details.jsp");
+			}			
 		}
 		
 		dispatcher.forward(request, response);

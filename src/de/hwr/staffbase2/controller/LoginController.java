@@ -15,6 +15,10 @@ import de.hwr.staffbase2.model.Account;
 import de.hwr.staffbase2.model.AccountDAO;
 import de.hwr.staffbase2.model.AccountDAOFactory;
 import de.hwr.staffbase2.model.AccountFactory;
+import de.hwr.staffbase2.model.Employee;
+import de.hwr.staffbase2.model.EmployeeDAO;
+import de.hwr.staffbase2.model.EmployeeDAOFactory;
+import de.hwr.staffbase2.model.EmployeeFactory;
 
 /**
  * Servlet implementation class LoginController
@@ -78,14 +82,15 @@ public class LoginController extends HttpServlet {
 		RequestDispatcher dispatcher = null;
 
 		
+		String username = (String) request.getSession().getAttribute("username");
+		AccountDAO accountDAO = AccountDAOFactory.getInstance().getAccountDAO();
+		Account account = AccountFactory.getInstance().getAccount();
+		account = accountDAO.find(username);
+		Employee emp = account.getEmployee();
+		long id = emp.getId();
 
-		if(correct && isManager){
-			System.out.println("User und PW Kombi existiert und ist Manager");
-			dispatcher = getServletContext().getRequestDispatcher("/settings.jsp");
-			dispatcher.forward(request, response);
-		}else if(correct && !isManager){
-			System.out.println("User und PW Kombi existiert und ist kein Manager");
-			dispatcher = getServletContext().getRequestDispatcher("/login.jsp");
+		if(correct){
+			dispatcher = getServletContext().getRequestDispatcher("/EmployeeController?change="+id);
 			dispatcher.forward(request, response);
 		}else{
 			System.out.println("User und PW Kombi existiert nicht");

@@ -19,9 +19,9 @@
     <input name="logo_staffbase" type="image" src="drawable/staffbase_logo.png" />
   <!-- end .header --></div>
   <div class="navigationbar">
-	<input id="navigationbutton" name="sign-out" type="button" value="Abmelden" style="float:right"  /> <!-- onclick="window.location.href='login.html'" -->
+	<input id="navigationbutton" name="sign-out" type="button" value="Abmelden" style="float:right" onclick="location.href='<%=request.getContextPath()%>/LogoutController'"  /> <!-- onclick="window.location.href='login.html'" -->
 	<input id="navigationbutton" name="account" type="button" value="Konto" style="float:right; background-color: #47C824;"  />
-	<input id="navigationbutton" name="employee" type="button" value="Mitarbeiter" />
+	<input id="navigationbutton" name="employee" type="button" value="Mitarbeiter" onclick="location.href='<%=request.getContextPath()%>/EmployeeController'" />
 	<input id="navigationbutton" name="department" type="button" value="Abteilung" />
 	<input id="navigationbutton" name="employee" type="button" value="Stellen" />
   <!-- end .navigationbar --></div>
@@ -29,17 +29,18 @@
   
   <%
   	String change = request.getParameter("change");
+  	System.out.println(change);
 	EmployeeDAO employeeDAO = EmployeeDAOFactory.getInstance().getEmployeeDAO();
 	Employee employee = EmployeeFactory.getInstance().getEmployee();
-  
-	employee = employeeDAO.find(Long.parseLong(change));
+  	long changelong = Long.parseLong(change);
+	employee = employeeDAO.find(changelong);
 	
   %>
   
   <center>
-    <form id="input_login" action="EmployeeController?update=1" method="post" name="login" target="_self">
+    <form id="input_login" action="EmployeeController?update=1" method="post" name="login">
 		<label>ID </label>
-		<input type="text" id="readonly" name="_id" readonly onfocus="this.blur();" value="<%=employee.getId()%>"/><br>
+		<input type="text" id="readonly" name="id" readonly onfocus="this.blur();" value="<%=employee.getId()%>"/><br>
 		<label>Name </label>
 		<input id="userinputvalues" name="name" type="text" maxlength="50"  value="<%=employee.getSurname()%>"/><br>
 		<label>Vorname </label>
