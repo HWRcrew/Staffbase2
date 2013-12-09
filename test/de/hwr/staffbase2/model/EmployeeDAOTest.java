@@ -66,9 +66,11 @@ public class EmployeeDAOTest {
 		Employee employee = EmployeeFactory.getInstance().getEmployee();
 		employee.setPrename("Hans");
 		employee.setSalary(4125);
+		System.out.println(employee.getId());
 		Employee employee2 = EmployeeFactory.getInstance().getEmployee();
 		employee2.setPrename("Günther");
 		employee2.setSalary(3400);
+		System.out.println(employee2.getId());
 		employeeDAO.insert(employee);
 		employeeDAO.insert(employee2);
 		List<Employee> employees = employeeDAO.find();

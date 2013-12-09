@@ -13,7 +13,7 @@ public class IdFactoryTest {
 		long id = IdFactory.getInstance().generateID();
 		String idString = id+"";
 		Calendar now = Calendar.getInstance();
-		assertEquals(17, idString.length());
+		assertEquals(18, idString.length());
 		String year = now.get(Calendar.YEAR)+"";
 		assertEquals(year, idString.substring(0, 4));
 	}

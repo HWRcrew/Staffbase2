@@ -42,8 +42,9 @@ public class IdFactory {
 		if (millisecond.length() == 2) {
 			millisecond = "0".concat(millisecond);
 		}
+		String random = (int)(Math.random()*9+1)+"";
 		String idString = new String(year + month + date + hour + minute
-				+ second + millisecond);
+				+ second + millisecond + random);
 		long id = Long.parseLong(idString);
 		return id;
 	}

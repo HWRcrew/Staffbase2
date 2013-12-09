@@ -53,7 +53,6 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 				preparedStatement.setLong(10, 0);
 			}
 			preparedStatement.executeUpdate();
-			System.out.println("Insert of Account complete!");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
