@@ -19,7 +19,7 @@ public class AccountDAOTest {
 		Account account = AccountFactory.getInstance().getAccount();
 		account.setManager(true);
 		account.setPassword("passwort");
-		account.setUsername("sebastiangrosse");
+		account.setUsername("sebastiangrosses");
 		// DAO instanzieren
 		AccountDAO accountDAO = AccountDAOFactory.getInstance().getAccountDAO();
 		accountDAO.insert(account);
@@ -71,7 +71,8 @@ public class AccountDAOTest {
 		AccountDAO accountDAO = AccountDAOFactory.getInstance().getAccountDAO();
 		accountDAO.insert(account);
 		// Test ob in DB vorhanden
-		assertNotNull(accountDAO.find(account.getUsername(), account.getPassword()));
+		assertNotNull(accountDAO.find(account.getUsername(),
+				account.getPassword()));
 		accountDAO.delete(account);
 	}
 
