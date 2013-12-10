@@ -40,6 +40,7 @@ public class AccountDAOTest {
 		AccountDAO accountDAO = AccountDAOFactory.getInstance().getAccountDAO();
 		// insert
 		accountDAO.insert(account);
+		assertEquals("sebastiangrosse", accountDAO.find(account.getId()).getUsername());
 		account.setUsername("leroyhöbold");
 		account.setManager(false);
 		// update

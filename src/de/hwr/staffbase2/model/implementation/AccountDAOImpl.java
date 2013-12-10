@@ -37,7 +37,6 @@ public class AccountDAOImpl implements AccountDAO {
 					preparedStatement.setLong(5, 0);
 				}
 				preparedStatement.executeUpdate();
-				System.out.println("Insert complete!");
 			} catch (SQLException e) {
 				e.printStackTrace();
 			} finally {
@@ -72,6 +71,7 @@ public class AccountDAOImpl implements AccountDAO {
 				preparedStatement.setLong(4, 0);
 			}
 			preparedStatement.setLong(5, account.getId());
+			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -97,9 +97,6 @@ public class AccountDAOImpl implements AccountDAO {
 			preparedStatement = connection.prepareStatement(queryString);
 			preparedStatement.setLong(1, account.getId());
 			preparedStatement.executeUpdate();
-			System.out.println("Remove of Account with username: "
-					+ account.getUsername() + " and id: " + account.getId()
-					+ " complete! Employee has to be removed separately.");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
