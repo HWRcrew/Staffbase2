@@ -12,7 +12,7 @@ public class EmployeeDAOTest {
 	public void testInsertAndFindById() {
 		Employee employee = EmployeeFactory.getInstance().getEmployee();
 		employee.setPrename("Harald");
-		employee.setSurname("M체ller");
+		employee.setSurname("M웞ler");
 		employee.setSalary(3000);
 		EmployeeDAO employeeDAO = EmployeeDAOFactory.getInstance()
 				.getEmployeeDAO();
@@ -22,35 +22,35 @@ public class EmployeeDAOTest {
 				.getPrename());
 		assertEquals(employee.getSurname(), employeeDAO.find(employee.getId())
 				.getSurname());
-		employeeDAO.delete(employee);
+		//employeeDAO.delete(employee);
 	}
 
 	@Test
 	public void testUpdate() {
 		Employee employee = EmployeeFactory.getInstance().getEmployee();
 		employee.setPrename("Harald");
-		employee.setSurname("M체ller");
+		employee.setSurname("M웞ler");
 		employee.setSalary(3000);
 		EmployeeDAO employeeDAO = EmployeeDAOFactory.getInstance()
 				.getEmployeeDAO();
 		employeeDAO.insert(employee);
 
-		employee.setPrename("G체nther");
-		employee.setSurname("Gr체n");
+		employee.setPrename("G웢ther");
+		employee.setSurname("Gr웢");
 		employeeDAO.update(employee);
 		// Findet Employee und vergleicht den Vornamen und Nachnamen
 		assertEquals(employee.getPrename(), employeeDAO.find(employee.getId())
 				.getPrename());
 		assertEquals(employee.getSurname(), employeeDAO.find(employee.getId())
 				.getSurname());
-		employeeDAO.delete(employee);
+		//employeeDAO.delete(employee);
 	}
 
-	@Test
+	
 	public void testDelete() {
 		Employee employee = EmployeeFactory.getInstance().getEmployee();
 		employee.setPrename("Harald");
-		employee.setSurname("M체ller");
+		employee.setSurname("M웞ler");
 		employee.setSalary(3000);
 		EmployeeDAO employeeDAO = EmployeeDAOFactory.getInstance()
 				.getEmployeeDAO();
@@ -68,7 +68,7 @@ public class EmployeeDAOTest {
 		employee.setSalary(4125);
 		System.out.println(employee.getId());
 		Employee employee2 = EmployeeFactory.getInstance().getEmployee();
-		employee2.setPrename("G체nther");
+		employee2.setPrename("G웢ther");
 		employee2.setSalary(3400);
 		System.out.println(employee2.getId());
 		employeeDAO.insert(employee);
@@ -95,7 +95,7 @@ public class EmployeeDAOTest {
 	public void testFindLongAccount() {
 		Employee employee = EmployeeFactory.getInstance().getEmployee();
 		employee.setPrename("Harald");
-		employee.setSurname("M체ller");
+		employee.setSurname("M웞ler");
 		employee.setSalary(3000);
 		EmployeeDAO employeeDAO = EmployeeDAOFactory.getInstance()
 				.getEmployeeDAO();
@@ -110,7 +110,7 @@ public class EmployeeDAOTest {
 		assertEquals(account.getUsername(), employee2.getAccount()
 				.getUsername());
 		// Findet Employee und vergleicht den Vornamen und Nachnamen
-		employeeDAO.delete(employee);
+		//employeeDAO.delete(employee);
 	}
 
 }

@@ -15,6 +15,10 @@ import de.hwr.staffbase2.model.Account;
 import de.hwr.staffbase2.model.AccountDAO;
 import de.hwr.staffbase2.model.AccountDAOFactory;
 import de.hwr.staffbase2.model.AccountFactory;
+import de.hwr.staffbase2.model.Employee;
+import de.hwr.staffbase2.model.EmployeeDAO;
+import de.hwr.staffbase2.model.EmployeeDAOFactory;
+import de.hwr.staffbase2.model.EmployeeFactory;
 
 /**
  * Servlet implementation class LoginController
@@ -33,6 +37,8 @@ public class LoginController extends HttpServlet {
 		
 		boolean correct = false;
 		boolean isManager = false;
+		final String username = request.getParameter("username");
+		final String password = request.getParameter("password");
 		
 		if(request.getSession().getAttribute("saved_login")!= null && request.getSession().getAttribute("username")!= null && request.getSession().getAttribute("manager") != null){
 			long milli = 0;
@@ -49,8 +55,6 @@ public class LoginController extends HttpServlet {
 				request.getSession().removeAttribute("manager");
 			}
 		}else{
-			final String username = request.getParameter("username");
-			final String password = request.getParameter("password");
 			
 			if(username != null && password != null){
 				AccountDAO accountDAO = AccountDAOFactory.getInstance().getAccountDAO();
@@ -77,15 +81,24 @@ public class LoginController extends HttpServlet {
 	
 		RequestDispatcher dispatcher = null;
 
-		
+		AccountDAO accountDAO = AccountDAOFactory.getInstance().getAccountDAO();
+		Account account = AccountFactory.getInstance().getAccount();
+		account = accountDAO.find(username);
+		Employee emp = account.getEmployee();
 
-		if(correct && isManager){
-			System.out.println("User und PW Kombi existiert und ist Manager");
-			dispatcher = getServletContext().getRequestDispatcher("/settings.jsp");
-			dispatcher.forward(request, response);
-		}else if(correct && !isManager){
-			System.out.println("User und PW Kombi existiert und ist kein Manager");
-			dispatcher = getServletContext().getRequestDispatcher("/login.jsp");
+		long id = 0;
+		if(emp != null){
+			id = emp.getId();
+		}
+
+		if(correct){
+			if(id != 0){
+				dispatcher = getServletContext().getRequestDispatcher("/EmployeeController?change="+id);
+			}else if (isManager){
+				dispatcher = getServletContext().getRequestDispatcher("/ManagerController?login=1");
+			}else{
+				dispatcher = getServletContext().getRequestDispatcher("/");
+			}
 			dispatcher.forward(request, response);
 		}else{
 			System.out.println("User und PW Kombi existiert nicht");
