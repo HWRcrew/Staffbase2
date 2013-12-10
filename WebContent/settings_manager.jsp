@@ -21,13 +21,13 @@
 	<input id="navigationbutton" name="employee" type="button" value="Stellen" />
   <!-- end .navigationbar --></div>
   <div class="content">
-    <form id="input_login" action="" method="post" name="login" target="_self">
-	  <center><input type="text" id="userinput" maxlength="50" value="Mitarbeiter"/></center>
-   	  <center><input type="text" id="userinput" maxlength="50" placeholder="Nutzername"/></center>
+    <form id="input_login" action="ManagerController?insert=1" method="post" name="login" target="_self">
+	  <center><input type="text" id="userinput" maxlength="50" name="name" value="Mitarbeiter"/></center>
+   	  <center><input type="text" id="userinput" maxlength="50" name="username" placeholder="Nutzername"/></center>
 	  <center><input id="userinput" name="new_password" type="password" maxlength="50" placeholder="Neues Passwort"/></center>
 	  <center><input id="userinput" name="new_password_resume" type="password" maxlength="50" placeholder="Neues Passwort wiederholen"/></center>
 	  <center><div class="bg"> Manager: <input type="checkbox" name="checkbox_manager" /><!-- end .bg --></div></center>
-      <center><input id="button" name="submit" type="button" value="Speichern" /></center>
+      <center><input id="button" name="submit" type="submit" value="Speichern" /></center>
     </form>
     <!-- end .content --></div>
   <!-- end .container --></div>
