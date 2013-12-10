@@ -58,6 +58,10 @@ public class AccountDAOImpl implements AccountDAO {
 
 	@Override
 	public boolean update(Account account) {
+		Account testAccount = find(account.getUsername());
+		if (testAccount != null && testAccount.getId() != account.getId()) {
+			return false;
+		}
 		try {
 			String queryString = "UPDATE account SET username=?, password=md5(?), manager=?, fk_employee=? WHERE id=?;";
 			connection = ConnectionFactory.getInstance().getConnection();
