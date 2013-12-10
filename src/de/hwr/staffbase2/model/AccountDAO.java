@@ -20,10 +20,11 @@ public interface AccountDAO {
 	public boolean insert(Account account);
 
 	/**
-	 * Update eines account in der DB - prueft nicht den Username
+	 * Update eines account in der DB - prueft ob Username an anderem account
+	 * existiert
 	 * 
 	 * @param account
-	 * @return true bei Erfolg
+	 * @return true bei Erfolg false bei bestehendem username
 	 */
 	public boolean update(Account account);
 
