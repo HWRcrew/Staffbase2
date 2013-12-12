@@ -38,8 +38,23 @@ public class JobController extends HttpServlet {
 			String name = request.getParameter("name");
 			String salarystring = request.getParameter("salary");
 			String description = request.getParameter("description");
-			float salary = Float.parseFloat(salarystring);
 			
+			
+			if(checkValues(name, salarystring, description)){
+				float salary = 0;
+				try{
+					salary = Float.parseFloat(salarystring);
+				}catch(Exception e){
+					request.setAttribute("errorMessage", "Inkorrekte Eingabe: In dem Feld Gehalt muss eine Zahl sein.");
+					request.setAttribute("name", name);
+					request.setAttribute("description", description);
+					dispatcher = getServletContext().getRequestDispatcher("/JobController?change=");
+					dispatcher.forward(request, response);
+					return;
+				}
+			
+			
+							
 			JobDAO jobDAO = JobDAOFactory.getInstance().getJobDAO();
 			Job job = JobFactory.getInstance().getJob();
 			
@@ -51,6 +66,15 @@ public class JobController extends HttpServlet {
 			
 			
 			dispatcher = getServletContext().getRequestDispatcher("/JobController?change="+job.getId());
+			
+			}else{
+				request.setAttribute("errorMessage", "Inkorrekte Eingabe: Alle Pflichtfelder müssen eingetragen sein.");
+				request.setAttribute("name", name);
+				request.setAttribute("description", description);
+				request.setAttribute("salary", salarystring);
+				dispatcher = getServletContext().getRequestDispatcher("/JobController?change=");
+			}
+			
 		}else{
 			dispatcher = getServletContext().getRequestDispatcher("/tables_position.jsp");
 		}
@@ -73,6 +97,17 @@ public class JobController extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		handle(request,response);
+	}
+	
+	private boolean checkValues(String value1, String value2, String value3){
+		boolean check = false;
+		value1 = value1.replaceAll(" ", "");
+		value2 = value2.replaceAll(" ", "");
+		value3 = value3.replaceAll(" ", "");
+		if(!value1.equals("") && !value2.equals("") && !value3.equals("")){
+			check = true;
+		}
+		return check;
 	}
 
 }

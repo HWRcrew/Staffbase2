@@ -40,6 +40,8 @@ public class DepartmentController extends HttpServlet {
 			String name = request.getParameter("name");
 			String description = request.getParameter("description");
 			
+			if(checkValues(name, description)){
+			
 			 DepartmentDAO departmentDAO = DepartmentDAOFactory.getInstance().getDepartmentDAO();
 			 Department department = DepartmentFactory.getInstance().getDepartment();
 			 
@@ -50,9 +52,18 @@ public class DepartmentController extends HttpServlet {
 			 departmentDAO.update(department);
 			 
 			 dispatcher = getServletContext().getRequestDispatcher("/DepartmentController?change="+id);
+			 
+			}else{
+				request.setAttribute("errorMessage", "Inkorrekte Eingabe: Alle Pflichtfelder müssen eingetragen sein.");
+				request.setAttribute("name", name);
+				request.setAttribute("description", description);
+				dispatcher = getServletContext().getRequestDispatcher("/DepartmentController?change=");
+			}
 		}else if("1".equalsIgnoreCase(insert)){
 			String name = request.getParameter("name");
 			String description = request.getParameter("description");
+			
+			if(checkValues(name, description)){
 			
 			 DepartmentDAO departmentDAO = DepartmentDAOFactory.getInstance().getDepartmentDAO();
 			 Department department = DepartmentFactory.getInstance().getDepartment();
@@ -63,6 +74,14 @@ public class DepartmentController extends HttpServlet {
 			 departmentDAO.insert(department);
 			 
 			 dispatcher = getServletContext().getRequestDispatcher("/DepartmentController?change="+department.getId());
+			 
+			}else{
+				request.setAttribute("errorMessage", "Inkorrekte Eingabe: Alle Pflichtfelder müssen eingetragen sein.");
+				request.setAttribute("name", name);
+				request.setAttribute("description", description);
+				dispatcher = getServletContext().getRequestDispatcher("/DepartmentController?change=");
+			}
+			 
 		}else{
 			dispatcher = getServletContext().getRequestDispatcher("/tables_department.jsp");
 		}
@@ -85,6 +104,16 @@ public class DepartmentController extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		handle(request,response);
+	}
+	
+	private boolean checkValues(String value1, String value2){
+		boolean check = false;
+		value1 = value1.replaceAll(" ", "");
+		value2 = value2.replaceAll(" ", "");
+		if(!value1.equals("") && !value2.equals("")){
+			check = true;
+		}
+		return check;
 	}
 
 }

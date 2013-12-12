@@ -50,29 +50,41 @@ public class ManagerController extends HttpServlet {
 				manager = true;
 			}
 			
-			if(pw1.equals(pw2)){
+			if(checkValues(name, username, pw1, pw2)){
+			
+				if(pw1.equals(pw2)){
 
-				AccountDAO accountDAO = AccountDAOFactory.getInstance().getAccountDAO();
-				Account account = AccountFactory.getInstance().getAccount();
-				account.setManager(manager);
-				account.setPassword(pw1);
-				account.setUsername(username);
-
+					AccountDAO accountDAO = AccountDAOFactory.getInstance().getAccountDAO();
+					Account account = AccountFactory.getInstance().getAccount();
+					account.setManager(manager);
+					account.setPassword(pw1);
+					account.setUsername(username);
 				
-				EmployeeDAO employeeDAO = EmployeeDAOFactory.getInstance().getEmployeeDAO();
-				Employee employee = EmployeeFactory.getInstance().getEmployee();
-				employee.setSurname(name);
-				employee.setAccount(account);
-
-				account.setEmployee(employee);
 				
-				accountDAO.insert(account);
-				employeeDAO.insert(employee);
+					EmployeeDAO employeeDAO = EmployeeDAOFactory.getInstance().getEmployeeDAO();
+					Employee employee = EmployeeFactory.getInstance().getEmployee();
+					employee.setSurname(name);
+					employee.setAccount(account);
 
-				long id = employee.getId();
-				dispatcher = getServletContext().getRequestDispatcher("/EmployeeController?change="+id);
+					account.setEmployee(employee);
+				
+					accountDAO.insert(account);
+					employeeDAO.insert(employee);
+
+					long id = employee.getId();
+					dispatcher = getServletContext().getRequestDispatcher("/EmployeeController?change="+id);
+				}else{
+					request.setAttribute("errorMessage", "Inkorrekte Eingabe: Die eingegebenen Passwörter stimmen nicht überein.");
+					dispatcher = getServletContext().getRequestDispatcher("/settings_manager.jsp");
+				}
 			}else{
+				request.setAttribute("errorMessage", "Inkorrekte Eingabe: Alle Pflichtfelder müssen eingetragen sein.");
+				request.setAttribute("name", name);
+				request.setAttribute("username", username);
+				request.setAttribute("new_password", "");
+				request.setAttribute("new_password_resume", "");
 				dispatcher = getServletContext().getRequestDispatcher("/settings_manager.jsp");
+			
 			}
 			dispatcher.forward(request, response);
 		}else{
@@ -95,6 +107,18 @@ public class ManagerController extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		handle(request, response);
+	}
+	
+	private boolean checkValues(String value1, String value2, String value3, String value4){
+		boolean check = false;
+		value1 = value1.replaceAll(" ", "");
+		value2 = value2.replaceAll(" ", "");
+		value3 = value3.replaceAll(" ", "");
+		value4 = value4.replaceAll(" ", "");
+		if(!value1.equals("") && !value2.equals("") && !value3.equals("") && !value4.equals("")){
+			check = true;
+		}
+		return check;
 	}
 
 }

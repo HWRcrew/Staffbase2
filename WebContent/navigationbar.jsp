@@ -13,7 +13,7 @@
   <div class="navigationbar">
   	<form action="NavigationController" method="post" name="navigation">
 		<input id="navigationbutton" name="sign-out" type="submit" value="Abmelden" style="float:right" /> <!-- onclick="window.location.href='login.html'" -->
-		<input id="navigationbutton" name="account" type="submit" value="Konto" style="float:right; background-color: #47C824; color: #AC58FA"  />
+		<input id="navigationbutton" name="account" type="submit" value="Konto" style="float:right; background-color: #47C824"  /> <!-- ; color: #AC58FA" -->
 		<input id="navigationbutton" name="employee" type="submit" value="Mitarbeiter" />
 		<input id="navigationbutton" name="department" type="submit" value="Abteilung" />
 		<input id="navigationbutton" name="place" type="submit" value="Stellen" />

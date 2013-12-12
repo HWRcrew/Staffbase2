@@ -13,19 +13,19 @@
   <div class="header">
     <input name="logo_staffbase" type="image" src="drawable/staffbase_logo.png" />
   <!-- end .header --></div>
-  <div class="navigationbar">
-	<input id="navigationbutton" name="sign-out" type="button" value="Abmelden" style="float:right"  onclick="location.href='<%=request.getContextPath()%>/LogoutController'"/> <!-- onclick="window.location.href='login.html'" -->
-	<input id="navigationbutton" name="account" type="button" value="Konto" style="float:right; background-color: #47C824; color: #AC58FA"  />
-	<input id="navigationbutton" name="employee" type="button" value="Mitarbeiter"  onclick="location.href='<%=request.getContextPath()%>/EmployeeController'"/>
-	<input id="navigationbutton" name="department" type="button" value="Abteilung" onclick="location.href='<%=request.getContextPath()%>/DepartmentController'"/>
-	<input id="navigationbutton" name="employee" type="button" value="Stellen" onclick="location.href='<%=request.getContextPath()%>/JobController'" />
-  <!-- end .navigationbar --></div>
+  
+  		<!-- include the navigationbar -->
+  <jsp:directive.include file="navigationbar.jsp" />
+  
   <div class="content">
+  
+  	<center><div style="color:red">${errorMessage}</div></center>
+  
     <form id="input_login" action="ManagerController?insert=1" method="post" name="login" target="_self">
 	  <center><input type="text" id="userinput" maxlength="50" name="name" value="Mitarbeiter"/></center>
-   	  <center><input type="text" id="userinput" maxlength="50" name="username" placeholder="Nutzername"/></center>
-	  <center><input id="userinput" name="new_password" type="password" maxlength="50" placeholder="Neues Passwort"/></center>
-	  <center><input id="userinput" name="new_password_resume" type="password" maxlength="50" placeholder="Neues Passwort wiederholen"/></center>
+   	  <center><input type="text" id="userinput" maxlength="50" name="username" placeholder="Nutzername *" value='${username}'/></center>
+	  <center><input id="userinput" name="new_password" type="password" maxlength="50" placeholder="Neues Passwort *" value='${new_password}'/></center>
+	  <center><input id="userinput" name="new_password_resume" type="password" maxlength="50" placeholder="Neues Passwort wiederholen *" value='${new_password_resume}'/></center>
 	  <center><div class="bg"> Manager: <input type="checkbox" name="checkbox_manager" /><!-- end .bg --></div></center>
       <center><input id="button" name="submit" type="submit" value="Speichern" /></center>
     </form>

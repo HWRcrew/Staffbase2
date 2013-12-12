@@ -26,14 +26,13 @@
   <div class="header">
     <input name="logo_staffbase" type="image" src="drawable/staffbase_logo.png" />
   <!-- end .header --></div>
-  <div class="navigationbar">
-	<input id="navigationbutton" name="sign-out" type="button" value="Abmelden" style="float:right" onclick="location.href='<%=request.getContextPath()%>/LogoutController'"  /> <!-- onclick="window.location.href='login.html'" -->
-	<input id="navigationbutton" name="account" type="button" value="Konto" style="float:right; background-color: #47C824;"  />
-	<input id="navigationbutton" name="employee" type="button" value="Mitarbeiter" onclick="location.href='<%=request.getContextPath()%>/EmployeeController'" />
-	<input id="navigationbutton" name="department" type="button" value="Abteilung" onclick="location.href='<%=request.getContextPath()%>/DepartmentController'"/>
-	<input id="navigationbutton" name="employee" type="button" value="Stellen" onclick="location.href='<%=request.getContextPath()%>/JobController'"/>
-  <!-- end .navigationbar --></div>
+  
+  	<!-- include the navigationbar -->
+  <jsp:directive.include file="navigationbar.jsp" />
+  
   <div class="content">
+  
+  	<center><div style="color:red">${errorMessage}</div></center>
   
   <%
   	String change = request.getParameter("change");
@@ -53,19 +52,19 @@
     <form id="input_update" action="EmployeeController?update=1" method="post" name="login">
 		<label>ID </label>
 		<input type="text" id="readonly" name="id" readonly onfocus="this.blur();" value="<%=employee.getId()%>"/><br>
-		<label>Name </label>
+		<label>Name* </label>
 		<input id="userinputvalues" name="name" type="text" maxlength="50"  value="<%=employee.getSurname()%>"/><br>
-		<label>Vorname </label>
+		<label>Vorname* </label>
 		<input id="userinputvalues" name="prename" type="text" maxlength="50" value="<%=employee.getPrename()%>"/><br>
-		<label>Straße </label>
+		<label>Straße* </label>
 		<input id="userinputvalues" name="street" type="text" maxlength="50" value="<%=employee.getStreet()%>"/><br>
-		<label>Postleitzahl </label>
+		<label>Postleitzahl* </label>
 		<input id="userinputvalues" name="zipcode" type="text" maxlength="50" value="<%=employee.getZipcode()%>"/><br>
-		<label>Ort </label>
+		<label>Ort* </label>
 		<input id="userinputvalues" name="city" type="text" maxlength="50" value="<%=employee.getCity()%>"/><br> 
-		<label>Gehalt </label>
+		<label>Gehalt* </label>
 		<input type="text" id="userinputvalues" name="salary" value="<%=employee.getSalary()%>"/><br>
-		<label>Abteilung </label>
+		<label>Abteilung* </label>
 		<% if(employee.getDepartment() != null && !"1".equalsIgnoreCase(edit)){ %>
 		<input type="text" id="userinputvalues" name="department" value="<%=employee.getDepartment().getName()%>"/><br>
 		<%}else{
@@ -78,7 +77,7 @@
 			<%} %>
 		</select></br>
 		<%} %>
-		<label>Stelle </label>
+		<label>Stelle* </label>
 		<%if(employee.getJob() != null && !"1".equalsIgnoreCase(edit)){ %>		
 		<input type="text" id="userinputvalues" name="job" value="<%=employee.getJob().getName()%>"/><br>
 		<%}else{ 
@@ -102,19 +101,19 @@
     <form id="input_insert" action="EmployeeController?insert=1" method="post" >
 		<label>ID </label>
 		<input type="text" id="readonly" name="id" readonly onfocus="this.blur();"/><br>
-		<label>Name </label>
-		<input id="userinputvalues" name="name" type="text" maxlength="50" /><br>
-		<label>Vorname </label>
-		<input id="userinputvalues" name="prename" type="text" maxlength="50"/><br>
-		<label>Straße </label>
-		<input id="userinputvalues" name="street" type="text" maxlength="50" /><br>
-		<label>Postleitzahl </label>
-		<input id="userinputvalues" name="zipcode" type="text" maxlength="50" /><br>
-		<label>Ort </label>
-		<input id="userinputvalues" name="city" type="text" maxlength="50"/><br> 
-		<label>Gehalt </label>
-		<input type="text" id="userinputvalues" name="salary"/><br>
-		<label>Abteilung </label>
+		<label>Name* </label>
+		<input id="userinputvalues" name="name" type="text" maxlength="50" value='${name}'/><br>
+		<label>Vorname* </label>
+		<input id="userinputvalues" name="prename" type="text" maxlength="50" value='${prename}'/><br>
+		<label>Straße* </label>
+		<input id="userinputvalues" name="street" type="text" maxlength="50" value='${street}'/><br>
+		<label>Postleitzahl* </label>
+		<input id="userinputvalues" name="zipcode" type="text" maxlength="50" value='${zipcode}'/><br>
+		<label>Ort* </label>
+		<input id="userinputvalues" name="city" type="text" maxlength="50" value='${city}'/><br> 
+		<label>Gehalt* </label>
+		<input type="text" id="userinputvalues" name="salary" value='${salary}'/><br>
+		<label>Abteilung* </label>
 		<%
 			DepartmentDAO departmentDAO = DepartmentDAOFactory.getInstance().getDepartmentDAO();
 			List<Department> department = departmentDAO.find();
@@ -124,7 +123,7 @@
 			<option value="<%=d.getId()%>"><%=d.getName() %></option>
 			<%} %>
 		</select></br>
-		<label>Stelle </label>
+		<label>Stelle* </label>
 		<%
 		JobDAO jobDAO = JobDAOFactory.getInstance().getJobDAO();
 		List<Job> job = jobDAO.find();
