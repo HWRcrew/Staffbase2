@@ -1,3 +1,7 @@
+<%@page import="de.hwr.staffbase2.model.JobFactory"%>
+<%@page import="de.hwr.staffbase2.model.Job"%>
+<%@page import="de.hwr.staffbase2.model.JobDAOFactory"%>
+<%@page import="de.hwr.staffbase2.model.JobDAO"%>
 <%@ page contentType="text/html; charset=utf-8" language="java" import="java.sql.*" errorPage="" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -23,17 +27,40 @@
   <!-- end .navigationbar --></div>
   <div class="content">
   <center>
-    <form id="input_login" action="" method="post" name="login" target="_self">
+  <%
+  String change = request.getParameter("change");
+  if(change.length()>0 && change != null){
+  long changelong = Long.parseLong(change);
+  JobDAO jobDAO = JobDAOFactory.getInstance().getJobDAO();
+  Job job = jobDAO.find(changelong);
+  
+  %>
+		<form id="input_login" action="JobController?update=1" method="post" name="login" target="_self">
+		<label>ID </label>
+		<input type="text" id="readonly" name="_id" readonly onfocus="this.blur();" value="<%=job.getId()%>"/><br>
+		<label>Name </label>
+		<input id="userinputvalues" name="name" type="text" maxlength="50" value="<%=job.getName()%>"/><br>
+		<label>Gehalt </label>
+		<input id="userinputvalues" name="salary" type="text" maxlength="50" value="<%=job.getSalary()%>"/><br>
+		<label>Beschreibung </label>
+		<textarea id="userinputvalues_rich" name="description" cols="25" rows="5" ><%=job.getDescription()%></textarea><br>
+	<%
+  }else{
+	  
+	%>
+		<form id="input_login" action="JobController?insert=1" method="post" name="login" target="_self">
 		<label>ID </label>
 		<input type="text" id="readonly" name="_id" readonly onfocus="this.blur();"/><br>
 		<label>Name </label>
 		<input id="userinputvalues" name="name" type="text" maxlength="50" /><br>
 		<label>Gehalt </label>
-		<input id="userinputvalues" name="wages" type="text" maxlength="50" /><br>
+		<input id="userinputvalues" name="salary" type="text" maxlength="50" /><br>
 		<label>Beschreibung </label>
-		<textarea id="userinputvalues_rich" name="comments" cols="25" rows="5" ></textarea><br>
-		
-		<input id="button_large" name="submit" type="button" value="Speichern" /><br>
+		<textarea id="userinputvalues_rich" name="description" cols="25" rows="5" ></textarea><br>
+	<%
+  }
+	%>	
+		<input id="button_large" name="submit" type="submit" value="Speichern" /><br>
     </form>
 	</center>
     <!-- end .content --></div>

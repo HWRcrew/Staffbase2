@@ -1,4 +1,8 @@
 
+<%@page import="de.hwr.staffbase2.model.Job"%>
+<%@page import="java.util.List"%>
+<%@page import="de.hwr.staffbase2.model.JobDAOFactory"%>
+<%@page import="de.hwr.staffbase2.model.JobDAO"%>
 <%@ page contentType="text/html; charset=utf-8" language="java" import="java.sql.*" errorPage="" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -24,32 +28,30 @@
   <!-- end .navigationbar --></div>
   <div class="content">
   <center>
+  <%
+  JobDAO jobDAO = JobDAOFactory.getInstance().getJobDAO();
+  List<Job> joblist = jobDAO.find();
+  %>
      <table border="0">
 	 <th>ID</th>
 	 <th>Name</th>
 	 <th>Monatsgehalt</th>
+	 <%
+	 for(Job j : joblist){
+	 %>
 	  <tr>
-		<td><input id="readonly_small" type="text" readonly onfocus="this.blur();"/></td>
-		<td><input id="readonly_small" type="text" readonly onfocus="this.blur();"/></td>
-        <td><input id="readonly_small" type="text" readonly onfocus="this.blur();"/></td>
-		<td><input id="button_edit" type="button" value="Bearbeiten" /></td>
+		<td><input id="readonly_small" type="text" readonly onfocus="this.blur();" value="<%=j.getId() %>"/></td>
+		<td><input id="readonly_small" type="text" readonly onfocus="this.blur();" value="<%=j.getName() %>"/></td>
+        <td><input id="readonly_small" type="text" readonly onfocus="this.blur();" value="<%=j.getSalary() %>"/></td>
+		<td><input id="button_edit" type="button" value="Bearbeiten" onclick="location.href='<%=request.getContextPath()%>/JobController?change=<%=j.getId()%>'"/></td>
 	  </tr>
-	  <tr>
-		<td><input id="readonly_small" type="text" readonly onfocus="this.blur();"/></td>
-		<td><input id="readonly_small" type="text" readonly onfocus="this.blur();"/></td>
-        <td><input id="readonly_small" type="text" readonly onfocus="this.blur();"/></td>
-		<td><input id="button_edit" type="button" value="Bearbeiten" /></td>
-	  </tr>
-	  <tr>
-		<td><input id="readonly_small" type="text" readonly onfocus="this.blur();"/></td>
-		<td><input id="readonly_small" type="text" readonly onfocus="this.blur();"/></td>
-        <td><input id="readonly_small" type="text" readonly onfocus="this.blur();"/></td>
-		<td><input id="button_edit" type="button" value="Bearbeiten" /></td>
-	  </tr>
+	  <% 
+	  }
+	  %>
   </table>
 	</center>
     <bottom>
-    <input id="button" name="new_position" type="button" value="Neue Stelle"/>
+    <input id="button" name="new_position" type="button" value="Neue Stelle"  onclick="location.href='<%=request.getContextPath()%>/JobController?change='"/>
     </bottom>
     <!-- end .content --></div>
   <!-- end .container --></div>

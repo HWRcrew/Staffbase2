@@ -19,12 +19,12 @@ public class JobDAOTest {
 		Job job = JobFactory.getInstance().getJob();
 		job.setName("Entwickler");
 		job.setSalary(4125);
-		job.setDescription("Stelle eines Entwickler. Entwickler sind f체r die Programmierung und das logische Design der Software verantwortlich.");
+		job.setDescription("Stelle eines Entwickler. Entwickler sind f웦 die Programmierung und das logische Design der Software verantwortlich.");
 		JobDAO jobDAO = JobDAOFactory.getInstance().getJobDAO();
 		jobDAO.insert(job);
 		assertEquals("Entwickler", jobDAO.find(job.getId()).getName());
 		assertEquals(
-				"Stelle eines Entwickler. Entwickler sind f체r die Programmierung und das logische Design der Software verantwortlich.",
+				"Stelle eines Entwickler. Entwickler sind f웦 die Programmierung und das logische Design der Software verantwortlich.",
 				jobDAO.find(job.getId()).getDescription());
 		assertEquals(4125, jobDAO.find(job.getId()).getSalary(), 0);
 	}
@@ -34,7 +34,7 @@ public class JobDAOTest {
 		Job job = JobFactory.getInstance().getJob();
 		job.setName("Entwickler");
 		job.setSalary(4125);
-		job.setDescription("Stelle eines Entwickler. Entwickler sind f체r die Programmierung und das logische Design der Software verantwortlich.");
+		job.setDescription("Stelle eines Entwickler. Entwickler sind f웦 die Programmierung und das logische Design der Software verantwortlich.");
 		JobDAO jobDAO = JobDAOFactory.getInstance().getJobDAO();
 		jobDAO.insert(job);
 
@@ -68,7 +68,7 @@ public class JobDAOTest {
 		job.setName("Entwickler");
 		job.setSalary(4125);
 		Job job2 = JobFactory.getInstance().getJob();
-		job2.setName("Verk채ufer");
+		job2.setName("Verk둼fer");
 		job2.setSalary(1234);
 		jobDAO.insert(job);
 		jobDAO.insert(job2);

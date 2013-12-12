@@ -1,3 +1,11 @@
+<%@page import="de.hwr.staffbase2.model.Job"%>
+<%@page import="de.hwr.staffbase2.model.JobDAOFactory"%>
+<%@page import="de.hwr.staffbase2.model.JobDAO"%>
+<%@page import="java.util.List"%>
+<%@page import="de.hwr.staffbase2.model.DepartmentFactory"%>
+<%@page import="de.hwr.staffbase2.model.Department"%>
+<%@page import="de.hwr.staffbase2.model.DepartmentDAO"%>
+<%@page import="de.hwr.staffbase2.model.DepartmentDAOFactory"%>
 <%@page import="de.hwr.staffbase2.model.EmployeeFactory"%>
 <%@page import="de.hwr.staffbase2.model.EmployeeDAOFactory"%>
 <%@page import="de.hwr.staffbase2.model.Employee"%>
@@ -29,9 +37,11 @@
   
   <%
   	String change = request.getParameter("change");
+ 	String edit = request.getParameter("edit");
   	System.out.println(change);
 	EmployeeDAO employeeDAO = EmployeeDAOFactory.getInstance().getEmployeeDAO();
 	Employee employee = EmployeeFactory.getInstance().getEmployee();
+  	if(change != null && change.length()>0){
   	long changelong = Long.parseLong(change);
 	employee = employeeDAO.find(changelong);
 	
@@ -51,18 +61,64 @@
 		<input id="userinputvalues" name="zipcode" type="text" maxlength="50" value="<%=employee.getZipcode()%>"/><br>
 		<label>Ort </label>
 		<input id="userinputvalues" name="city" type="text" maxlength="50" value="<%=employee.getCity()%>"/><br> 
-			<!-- show only: wages, department, place -->
-			<div class="">
-			<label>Gehalt </label>
-			<input type="text" id="userinputvalues" name="salary" value="<%=employee.getSalary()%>"/><br>
-			<label>Abteilung </label>
-			<input type="text" id="userinputvalues" name="department" value="<%=employee.getDepartment()%>"/><br>
-			<label>Stelle </label>
-			<input type="text" id="userinputvalues" name="job" value="<%=employee.getJob()%>"/><br>
-			<!-- end .showonly --></div>
+		<label>Gehalt </label>
+		<input type="text" id="userinputvalues" name="salary" value="<%=employee.getSalary()%>"/><br>
+		<label>Abteilung </label>
+		<% if(employee.getDepartment() != null && !"1".equalsIgnoreCase(edit)){ %>
+		<input type="text" id="userinputvalues" name="department" value="<%=employee.getDepartment().getName()%>"/><br>
+		<%}else{
+			DepartmentDAO departmentDAO = DepartmentDAOFactory.getInstance().getDepartmentDAO();
+			List<Department> department = departmentDAO.find();
+		%>
+		<select name="selectdeparment" id="userinputvalues">
+			<%for(Department d : department){ %>
+			<option value="<%=d.getId()%>"><%=d.getName() %></option>
+			<%} %>
+		</select></br>
+		<%} %>
+		<label>Stelle </label>
+		<%if(employee.getJob() != null && !"1".equalsIgnoreCase(edit)){ %>		
+		<input type="text" id="userinputvalues" name="job" value="<%=employee.getJob().getName()%>"/><br>
+		<%}else{ 
+		JobDAO jobDAO = JobDAOFactory.getInstance().getJobDAO();
+		List<Job> job = jobDAO.find();
+		%>
+		<select name="selectjob" id="userinputvalues">
+			<%for(Job j : job){ %>
+			<option value="<%=j.getId()%>"><%=j.getName() %></option>
+			<%} %>
+		</select></br>
+		<%} %>
+			
+			<%
+  	}else{
+			%>
+			<center>
+    <form id="input_login" action="EmployeeController?insert=1" method="post" name="login">
+		<label>ID </label>
+		<input type="text" id="readonly" name="id" readonly onfocus="this.blur();"/><br>
+		<label>Name </label>
+		<input id="userinputvalues" name="name" type="text" maxlength="50" /><br>
+		<label>Vorname </label>
+		<input id="userinputvalues" name="prename" type="text" maxlength="50"/><br>
+		<label>Straße </label>
+		<input id="userinputvalues" name="street" type="text" maxlength="50" /><br>
+		<label>Postleitzahl </label>
+		<input id="userinputvalues" name="zipcode" type="text" maxlength="50" /><br>
+		<label>Ort </label>
+		<input id="userinputvalues" name="city" type="text" maxlength="50"/><br> 
+		<label>Gehalt </label>
+		<input type="text" id="userinputvalues" name="salary"/><br>
+		<label>Abteilung </label>
+		<input type="text" id="userinputvalues" name="department"/><br>
+		<label>Stelle </label>
+		<input type="text" id="userinputvalues" name="job"/><br>
+		<%
+  	}
+		%>
 		<input id="button_large" name="submit" type="submit" value="Speichern" /><br>
-		<input id="button_large" name="edit" type="button" value="Konto bearbeiten" />
     </form>
+		<input id="button_large" name="edit" type="button" value="Konto bearbeiten" onclick="location.href='<%=request.getContextPath()%>/EmployeeController?change=<%=employee.getId()%>&edit=1'" />
     <!-- end .content --></div>
   <!-- end .container --></div>
 </body>

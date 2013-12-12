@@ -56,7 +56,7 @@
   </table>
 	</center>
     <bottom>
-    <input id="button" name="new_employsee" type="button" value="Neuer Mitarbeiter" onclick="location.href='<%=request.getContextPath()%>/EmployeeController?insert=1'"/>
+    <input id="button" name="new_employsee" type="button" value="Neuer Mitarbeiter" onclick="location.href='<%=request.getContextPath()%>/EmployeeController?change='"/>
     </bottom>
     <!-- end .content --></div>
   <!-- end .container --></div>
