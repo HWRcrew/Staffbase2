@@ -52,19 +52,19 @@ public class ManagerController extends HttpServlet {
 			
 			if(pw1.equals(pw2)){
 				System.out.println("Mitarbeiter: "+name+" Username: "+username+ " PW: "+pw2+" Manager: "+manager);
-				AccountDAO accountDAO = AccountDAOFactory.getInstance().getAccountDAO();
-				EmployeeDAO employeeDAO = EmployeeDAOFactory.getInstance().getEmployeeDAO();
-				Employee employee = EmployeeFactory.getInstance().getEmployee();
-				Account account = AccountFactory.getInstance().getAccount();
 
-				
-				employee.setSurname(name);
-				
+				AccountDAO accountDAO = AccountDAOFactory.getInstance().getAccountDAO();
+				Account account = AccountFactory.getInstance().getAccount();
 				account.setManager(manager);
 				account.setPassword(pw1);
 				account.setUsername(username);
 
+				
+				EmployeeDAO employeeDAO = EmployeeDAOFactory.getInstance().getEmployeeDAO();
+				Employee employee = EmployeeFactory.getInstance().getEmployee();
+				employee.setSurname(name);
 				employee.setAccount(account);
+
 				account.setEmployee(employee);
 				
 				accountDAO.insert(account);

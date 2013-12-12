@@ -22,8 +22,8 @@
 	<input id="navigationbutton" name="sign-out" type="button" value="Abmelden" style="float:right" onclick="location.href='<%=request.getContextPath()%>/LogoutController'"  /> <!-- onclick="window.location.href='login.html'" -->
 	<input id="navigationbutton" name="account" type="button" value="Konto" style="float:right; background-color: #47C824;"  />
 	<input id="navigationbutton" name="employee" type="button" value="Mitarbeiter" onclick="location.href='<%=request.getContextPath()%>/EmployeeController'" />
-	<input id="navigationbutton" name="department" type="button" value="Abteilung" />
-	<input id="navigationbutton" name="employee" type="button" value="Stellen" />
+	<input id="navigationbutton" name="department" type="button" value="Abteilung" onclick="location.href='<%=request.getContextPath()%>/DepartmentController'"/>
+	<input id="navigationbutton" name="employee" type="button" value="Stellen" onclick="location.href='<%=request.getContextPath()%>/JobController'"/>
   <!-- end .navigationbar --></div>
   <div class="content">
   
@@ -52,13 +52,13 @@
 		<label>Ort </label>
 		<input id="userinputvalues" name="city" type="text" maxlength="50" value="<%=employee.getCity()%>"/><br> 
 			<!-- show only: wages, department, place -->
-			<div class="showonly">
+			<div class="">
 			<label>Gehalt </label>
-			<input type="text" id="showonlyvalues" name="_salary" readonly onfocus="this.blur();" value="<%=employee.getSalary()%>"/><br>
+			<input type="text" id="userinputvalues" name="salary" value="<%=employee.getSalary()%>"/><br>
 			<label>Abteilung </label>
-			<input type="text" id="showonlyvalues" name="_department" readonly onfocus="this.blur();" value="<%=employee.getDepartment()%>"/><br>
+			<input type="text" id="userinputvalues" name="department" value="<%=employee.getDepartment()%>"/><br>
 			<label>Stelle </label>
-			<input type="text" id="showonlyvalues" name="_job" readonly onfocus="this.blur();" value="<%=employee.getJob()%>"/><br>
+			<input type="text" id="userinputvalues" name="job" value="<%=employee.getJob()%>"/><br>
 			<!-- end .showonly --></div>
 		<input id="button_large" name="submit" type="submit" value="Speichern" /><br>
 		<input id="button_large" name="edit" type="button" value="Konto bearbeiten" />
