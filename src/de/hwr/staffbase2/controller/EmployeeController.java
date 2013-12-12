@@ -38,15 +38,18 @@ public class EmployeeController extends HttpServlet {
 		String change = request.getParameter("change");
 		String insert = request.getParameter("insert");
 		String update = request.getParameter("update");
-		boolean manager = (Boolean) request.getSession().getAttribute("manager");
-		
-		
-				
-		if("1".equalsIgnoreCase(update)){
+
+		if(change != null){
+			dispatcher = getServletContext().getRequestDispatcher("/settings_details_editable.jsp");
+			
+		}else if("1".equalsIgnoreCase(update)){
 				
 				String name = request.getParameter("name");
 				String idstring = request.getParameter("id");
-				long id = Long.parseLong(idstring);
+				long id = 0;
+				if(idstring != null){
+					id = Long.parseLong(idstring);
+				}
 				String prename = request.getParameter("prename");
 				String street = request.getParameter("street");
 				String zipcodestr = request.getParameter("zipcode");
@@ -114,21 +117,65 @@ public class EmployeeController extends HttpServlet {
 				String name = request.getParameter("name");
 				String prename = request.getParameter("prename");
 				String street = request.getParameter("street");
-				int zipcode = Integer.parseInt(request.getParameter("zipcode"));
+				String zipcodestr = request.getParameter("zipcode");
+				int zipcode = 0;
+				if(zipcodestr.length()>0){
+					zipcode = Integer.parseInt(zipcodestr);
+				}
 				String city = request.getParameter("city");
+				String department = request.getParameter("selectdeparment");
+				String job = request.getParameter("selectjob");
+				String salary = request.getParameter("salary");
+				float salaryfl = 0f;
+				if(salary.length()>0){
+					salaryfl = Float.parseFloat(salary);
+				}
+				
+				Job j = null;
+				if(job != null){
+					long jobid = Long.parseLong(job);
+					JobDAO jobDAO = JobDAOFactory.getInstance().getJobDAO();
+					j = jobDAO.find(jobid);
+				}
+				
+				Department de = null;
+				if(department != null){
+					long depid = Long.parseLong(department);
+					DepartmentDAO departmentDAO = DepartmentDAOFactory.getInstance().getDepartmentDAO();
+					de = departmentDAO.find(depid);
+				}
 				
 				EmployeeDAO employeeDAO = EmployeeDAOFactory.getInstance().getEmployeeDAO();
 				Employee employee = EmployeeFactory.getInstance().getEmployee();
 				
-				employee.setSurname(name);
-				employee.setPrename(prename);
-				employee.setStreet(street);
-				employee.setZipcode(zipcode);
-				employee.setCity(city);
+				if(name != null){
+					employee.setSurname(name);
+				}
+				if(prename != null){
+					employee.setPrename(prename);
+				}
+				if(street != null){
+					employee.setStreet(street);
+				}
+				if(zipcode != 0){
+					employee.setZipcode(zipcode);
+				}
+				if(city != null){
+					employee.setCity(city);
+				}
+				if(salaryfl != 0f){
+					employee.setSalary(salaryfl);
+				}
+				if(de != null){
+					employee.setDepartment(de);
+				}
+				if(j != null){
+					employee.setJob(j);
+				}
 	
 				employeeDAO.insert(employee);
 				
-				dispatcher = getServletContext().getRequestDispatcher("/EmployeeController?show="+employee.getId());
+				dispatcher = getServletContext().getRequestDispatcher("/EmployeeController?change="+employee.getId());
 				
 			}else{
 				
@@ -136,15 +183,6 @@ public class EmployeeController extends HttpServlet {
 			}
 		
 		
-		if(manager){
-			if(change != null){
-				dispatcher = getServletContext().getRequestDispatcher("/settings_details_editable.jsp");
-			}
-		}else{
-			if(change != null){
-				dispatcher = getServletContext().getRequestDispatcher("/settings_details.jsp");
-			}			
-		}
 		
 		dispatcher.forward(request, response);
 	}

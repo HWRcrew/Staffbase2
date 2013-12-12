@@ -39,16 +39,18 @@
   	String change = request.getParameter("change");
  	String edit = request.getParameter("edit");
   	System.out.println(change);
-	EmployeeDAO employeeDAO = EmployeeDAOFactory.getInstance().getEmployeeDAO();
-	Employee employee = EmployeeFactory.getInstance().getEmployee();
-  	if(change != null && change.length()>0){
+  	
+	if(change != null && change.length()>0){
   	long changelong = Long.parseLong(change);
+
+  	EmployeeDAO employeeDAO = EmployeeDAOFactory.getInstance().getEmployeeDAO();
+	Employee employee = EmployeeFactory.getInstance().getEmployee();
 	employee = employeeDAO.find(changelong);
 	
   %>
   
   <center>
-    <form id="input_login" action="EmployeeController?update=1" method="post" name="login">
+    <form id="input_update" action="EmployeeController?update=1" method="post" name="login">
 		<label>ID </label>
 		<input type="text" id="readonly" name="id" readonly onfocus="this.blur();" value="<%=employee.getId()%>"/><br>
 		<label>Name </label>
@@ -89,12 +91,15 @@
 			<%} %>
 		</select></br>
 		<%} %>
+		<input id="button_large" name="submit" type="submit" value="Speichern" /><br>
+    	</form>
+    	<input id="button_large" name="edit" type="button" value="Konto bearbeiten" onclick="location.href='<%=request.getContextPath()%>/EmployeeController?change=<%=employee.getId()%>&edit=1'" />
 			
 			<%
   	}else{
 			%>
-			<center>
-    <form id="input_login" action="EmployeeController?insert=1" method="post" name="login">
+	<center>
+    <form id="input_insert" action="EmployeeController?insert=1" method="post" >
 		<label>ID </label>
 		<input type="text" id="readonly" name="id" readonly onfocus="this.blur();"/><br>
 		<label>Name </label>
@@ -110,15 +115,32 @@
 		<label>Gehalt </label>
 		<input type="text" id="userinputvalues" name="salary"/><br>
 		<label>Abteilung </label>
-		<input type="text" id="userinputvalues" name="department"/><br>
+		<%
+			DepartmentDAO departmentDAO = DepartmentDAOFactory.getInstance().getDepartmentDAO();
+			List<Department> department = departmentDAO.find();
+		%>
+		<select name="selectdeparment" id="userinputvalues">
+			<%for(Department d : department){ %>
+			<option value="<%=d.getId()%>"><%=d.getName() %></option>
+			<%} %>
+		</select></br>
 		<label>Stelle </label>
-		<input type="text" id="userinputvalues" name="job"/><br>
+		<%
+		JobDAO jobDAO = JobDAOFactory.getInstance().getJobDAO();
+		List<Job> job = jobDAO.find();
+		%>
+		<select name="selectjob" id="userinputvalues">
+			<%for(Job j : job){ %>
+			<option value="<%=j.getId()%>"><%=j.getName() %></option>
+			<%} %>
+		</select></br>
+		<input id="button_large" name="submit" type="submit" value="Speichern" /><br>
+    </form>
 		<%
   	}
 		%>
-		<input id="button_large" name="submit" type="submit" value="Speichern" /><br>
-    </form>
-		<input id="button_large" name="edit" type="button" value="Konto bearbeiten" onclick="location.href='<%=request.getContextPath()%>/EmployeeController?change=<%=employee.getId()%>&edit=1'" />
+	</center>
+		
     <!-- end .content --></div>
   <!-- end .container --></div>
 </body>
