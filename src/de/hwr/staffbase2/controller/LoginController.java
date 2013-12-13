@@ -34,6 +34,7 @@ public class LoginController extends HttpServlet {
 
 
 	private void handle(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+		request.setCharacterEncoding("UTF-8");
 		
 		boolean correct = false;
 		boolean isManager = false;
@@ -101,7 +102,6 @@ public class LoginController extends HttpServlet {
 			}
 			dispatcher.forward(request, response);
 		}else{
-			System.out.println("User und PW Kombi existiert nicht");
 			dispatcher = getServletContext().getRequestDispatcher("/login.jsp");
 			request.setAttribute("errorMessage", "Inkorrekte Eingabe: Nutzername oder Passwort");
 			dispatcher.forward(request, response);

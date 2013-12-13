@@ -66,7 +66,7 @@
 		<input type="text" id="userinputvalues" name="salary" value="<%=employee.getSalary()%>"/><br>
 		<label>Abteilung* </label>
 		<% if(employee.getDepartment() != null && !"1".equalsIgnoreCase(edit)){ %>
-		<input type="text" id="userinputvalues" name="department" value="<%=employee.getDepartment().getName()%>"/><br>
+		<input type="text" id="userinputvalues" readonly="readonly" name="department" value="<%=employee.getDepartment().getName()%>"/><br>
 		<%}else{
 			DepartmentDAO departmentDAO = DepartmentDAOFactory.getInstance().getDepartmentDAO();
 			List<Department> department = departmentDAO.find();
@@ -79,7 +79,7 @@
 		<%} %>
 		<label>Stelle* </label>
 		<%if(employee.getJob() != null && !"1".equalsIgnoreCase(edit)){ %>		
-		<input type="text" id="userinputvalues" name="job" value="<%=employee.getJob().getName()%>"/><br>
+		<input type="text" id="userinputvalues" readonly="readonly" name="job" value="<%=employee.getJob().getName()%>"/><br>
 		<%}else{ 
 		JobDAO jobDAO = JobDAOFactory.getInstance().getJobDAO();
 		List<Job> job = jobDAO.find();

@@ -27,6 +27,7 @@ public class DepartmentController extends HttpServlet {
 
 	private void handle(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		request.setCharacterEncoding("UTF-8");
+		
 		String change = request.getParameter("change");
 		String update = request.getParameter("update");
 		String insert = request.getParameter("insert");
@@ -76,7 +77,7 @@ public class DepartmentController extends HttpServlet {
 			 dispatcher = getServletContext().getRequestDispatcher("/DepartmentController?change="+department.getId());
 			 
 			}else{
-				request.setAttribute("errorMessage", "Inkorrekte Eingabe: Alle Pflichtfelder müssen eingetragen sein.");
+				request.setAttribute("errorMessage", "Inkorrekte Eingabe: Alle Pflichtfelder mŸssen eingetragen sein.");
 				request.setAttribute("name", name);
 				request.setAttribute("description", description);
 				dispatcher = getServletContext().getRequestDispatcher("/DepartmentController?change=");

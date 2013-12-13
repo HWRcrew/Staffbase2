@@ -40,7 +40,12 @@ public class EmployeeController extends HttpServlet {
 		String update = request.getParameter("update");
 
 		if(change != null){
-			dispatcher = getServletContext().getRequestDispatcher("/settings_details_editable.jsp");
+			boolean manager = (Boolean) request.getSession().getAttribute("manager");
+			if(manager){
+				dispatcher = getServletContext().getRequestDispatcher("/settings_details_editable.jsp");
+			}else{
+				dispatcher = getServletContext().getRequestDispatcher("/settings_details.jsp");
+			}
 			
 		}else if("1".equalsIgnoreCase(update)){
 				
@@ -142,7 +147,7 @@ public class EmployeeController extends HttpServlet {
 				
 				
 				}else{
-					request.setAttribute("errorMessage", "Inkorrekte Eingabe: Alle Pflichtfelder müssen eingetragen sein.");
+					request.setAttribute("errorMessage", "Inkorrekte Eingabe: Alle Pflichtfelder mŸssen eingetragen sein.");
 					request.setAttribute("name", name);
 					request.setAttribute("prename", prename);
 					request.setAttribute("street", street);
@@ -251,7 +256,7 @@ public class EmployeeController extends HttpServlet {
 				dispatcher = getServletContext().getRequestDispatcher("/EmployeeController?change="+employee.getId());
 				
 				}else{
-					request.setAttribute("errorMessage", "Inkorrekte Eingabe: Alle Pflichtfelder müssen eingetragen sein.");
+					request.setAttribute("errorMessage", "Inkorrekte Eingabe: Alle Pflichtfelder mŸssen eingetragen sein.");
 					request.setAttribute("name", name);
 					request.setAttribute("prename", prename);
 					request.setAttribute("street", street);

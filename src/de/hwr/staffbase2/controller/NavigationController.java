@@ -19,7 +19,7 @@ public class NavigationController extends HttpServlet{
 	
 	private void handle(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		
-		System.out.println("ja hier bin ich !!!");
+		request.setCharacterEncoding("UTF-8");	
 		
 		boolean sessionmanager;
 		RequestDispatcher dispatcher = null;

@@ -30,6 +30,7 @@ public class ManagerController extends HttpServlet {
      */
    
 	private void handle(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+		request.setCharacterEncoding("UTF-8");
 		
 		final String login = request.getParameter("login");
 		final String insert = request.getParameter("insert");
@@ -74,11 +75,11 @@ public class ManagerController extends HttpServlet {
 					long id = employee.getId();
 					dispatcher = getServletContext().getRequestDispatcher("/EmployeeController?change="+id);
 				}else{
-					request.setAttribute("errorMessage", "Inkorrekte Eingabe: Die eingegebenen Passwörter stimmen nicht überein.");
+					request.setAttribute("errorMessage", "Inkorrekte Eingabe: Die eingegebenen Passwšrter stimmen nicht Ÿberein.");
 					dispatcher = getServletContext().getRequestDispatcher("/settings_manager.jsp");
 				}
 			}else{
-				request.setAttribute("errorMessage", "Inkorrekte Eingabe: Alle Pflichtfelder müssen eingetragen sein.");
+				request.setAttribute("errorMessage", "Inkorrekte Eingabe: Alle Pflichtfelder mŸssen eingetragen sein.");
 				request.setAttribute("name", name);
 				request.setAttribute("username", username);
 				request.setAttribute("new_password", "");
