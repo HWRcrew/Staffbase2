@@ -6,23 +6,23 @@ body {
 	margin: 0;
 	padding: 0;
 	color: #000;
-	height: 920px;
+	height: 950px;
 }
 
 /* ~~ Element-/Tag-Selektoren ~~ */
-ul, ol, dl { /* Aufgrund von Abweichungen zwischen verschiedenen Browsern empfiehlt es sich, die AuffÃ¼llung und den Rand in Listen auf 0 einzustellen. Zu Konsistenzzwecken kÃ¶nnen Sie die gewÃ¼nschten Werte entweder hier oder in den enthaltenen Listenelementen (LI, DT, DD) eingeben. Beachten Sie, dass die hier eingegebenen Werte hierarchisch auf die .nav-Liste angewendet werden, sofern Sie keinen spezifischeren Selektor festlegen. */
+ul, ol, dl { /* Aufgrund von Abweichungen zwischen verschiedenen Browsern empfiehlt es sich, die Auffüllung und den Rand in Listen auf 0 einzustellen. Zu Konsistenzzwecken können Sie die gewünschten Werte entweder hier oder in den enthaltenen Listenelementen (LI, DT, DD) eingeben. Beachten Sie, dass die hier eingegebenen Werte hierarchisch auf die .nav-Liste angewendet werden, sofern Sie keinen spezifischeren Selektor festlegen. */
 	padding: 0;
 	margin: 0;
 }
 h1, h2, h3, h4, h5, h6, p {
-	margin-top: 0;	 /* Durch Verschieben des oberen Rands wird das Problem behoben, dass RÃ¤nder aus dem zugehÃ¶rigen div-Tag geraten kÃ¶nnen. Der Ã¼brig gebliebene untere Rand hÃ¤lt ihn getrennt von allen folgenden Elementen. */
+	margin-top: 0;	 /* Durch Verschieben des oberen Rands wird das Problem behoben, dass Ränder aus dem zugehörigen div-Tag geraten können. Der übrig gebliebene untere Rand hält ihn getrennt von allen folgenden Elementen. */
 	padding-right: 15px;
-	padding-left: 15px; /* Durch HinzufÃ¼gen der AuffÃ¼llung zu den Seiten der Elemente innerhalb der div-Tags anstelle der div-Tags selbst entfallen jegliche Box-Modell-Berechnungen. Alternativ kann auch ein verschachteltes div-Tag mit seitlicher AuffÃ¼llung verwendet werden. */
+	padding-left: 15px; /* Durch Hinzufügen der Auffüllung zu den Seiten der Elemente innerhalb der div-Tags anstelle der div-Tags selbst entfallen jegliche Box-Modell-Berechnungen. Alternativ kann auch ein verschachteltes div-Tag mit seitlicher Auffüllung verwendet werden. */
 }
-a img { /* Dieser Selektor entfernt den standardmÃ¤ÃŸigen blauen Rahmen, der in einigen Browsern um ein Bild angezeigt wird, wenn es von einem Hyperlink umschlossen ist. */
+a img { /* Dieser Selektor entfernt den standardmäßigen blauen Rahmen, der in einigen Browsern um ein Bild angezeigt wird, wenn es von einem Hyperlink umschlossen ist. */
 	border: none;
 }
-/* ~~ Die Reihenfolge der Stildefinitionen fÃ¼r die Hyperlinks der Site, einschlieÃŸlich der Gruppe der Selektoren zum Erzeugen des Hover-Effekts, muss erhalten bleiben. ~~ */
+/* ~~ Die Reihenfolge der Stildefinitionen für die Hyperlinks der Site, einschließlich der Gruppe der Selektoren zum Erzeugen des Hover-Effekts, muss erhalten bleiben. ~~ */
 a:link {
 	color: #42413C;
 	text-decoration: underline; /* Sofern Ihre Hyperlinks nicht besonders hervorgehoben werden sollen, empfiehlt es sich, zur schnellen visuellen Erkennung Unterstreichungen zu verwenden. */
@@ -35,12 +35,12 @@ a:hover, a:active, a:focus { /* Durch diese Gruppe von Selektoren wird bei Verwe
 	text-decoration: none;
 }
 
-/* ~~ Dieser Container mit fester Breite umschlieÃŸt alle anderen Elemente. ~~ */
+/* ~~ Dieser Container mit fester Breite umschließt alle anderen Elemente. ~~ */
 .container {
 	width: 960px;
 	background-color: #FFF; /* Der mit der Breite gekoppelte automatische Wert an den Seiten zentriert das Layout. */
 	border: 1px solid #000;
-	height: 900px;
+	height: auto;
 	margin-top: 0;
 	margin-right: auto;
 	margin-bottom: 0;
@@ -49,27 +49,30 @@ a:hover, a:active, a:focus { /* Durch diese Gruppe von Selektoren wird bei Verwe
 
 /* ~~ Dies sind die Layoutinformationen. ~~ 
 
-1) Eine AuffÃ¼llung wird nur oben und/oder unten im div-Tag positioniert. Die Elemente innerhalb dieses div-Tags verfÃ¼gen Ã¼ber eine seitliche AuffÃ¼llung. Dadurch mÃ¼ssen Sie keine Box-Modell-Berechnungen durchfÃ¼hren. Zu beachten: Wenn Sie dem div-Tag eine seitliche AuffÃ¼llung oder einen Rahmen hinzufÃ¼gen, werden diese zu der festgelegten Breite addiert und ergeben die *gesamte* Breite. Sie kÃ¶nnen auch die AuffÃ¼llung fÃ¼r das Element im div-Tag entfernen und ein zweites div-Tag ohne Breite und mit der gewÃ¼nschten AuffÃ¼llung im ersten div-Tag einfÃ¼gen.
+1) Eine Auffüllung wird nur oben und/oder unten im div-Tag positioniert. Die Elemente innerhalb dieses div-Tags verfügen über eine seitliche Auffüllung. Dadurch müssen Sie keine Box-Modell-Berechnungen durchführen. Zu beachten: Wenn Sie dem div-Tag eine seitliche Auffüllung oder einen Rahmen hinzufügen, werden diese zu der festgelegten Breite addiert und ergeben die *gesamte* Breite. Sie können auch die Auffüllung für das Element im div-Tag entfernen und ein zweites div-Tag ohne Breite und mit der gewünschten Auffüllung im ersten div-Tag einfügen.
 
 */
 .content {
 	padding: 10px 0;
+	width: 960px;
 	border-top-style: none;
 	border-right-style: none;
 	border-bottom-style: none;
 	border-left-style: none;
+	height: 100%;
+	clear: both;
 }
 
 /* ~~ Verschiedene float/clear-Klassen ~~ */
-.fltrt {  /* Mit dieser Klasse kÃ¶nnen Sie ein Element auf der Seite nach rechts flieÃŸen lassen. Das flieÃŸende Element muss vor dem Element stehen, neben dem es auf der Seite erscheinen soll. */
+.fltrt {  /* Mit dieser Klasse können Sie ein Element auf der Seite nach rechts fließen lassen. Das fließende Element muss vor dem Element stehen, neben dem es auf der Seite erscheinen soll. */
 	float: right;
 	margin-left: 8px;
 }
-.fltlft { /* Mit dieser Klasse kÃ¶nnen Sie ein Element auf der Seite nach links flieÃŸen lassen. Das flieÃŸende Element muss vor dem Element stehen, neben dem es auf der Seite erscheinen soll. */
+.fltlft { /* Mit dieser Klasse können Sie ein Element auf der Seite nach links fließen lassen. Das fließende Element muss vor dem Element stehen, neben dem es auf der Seite erscheinen soll. */
 	float: left;
 	margin-right: 8px;
 }
-.clearfloat { /* Diese Klasse kann in einem <br />-Tag oder leeren div-Tag als letztes Element nach dem letzten flieÃŸenden div-Tag (im #container) platziert werden, wenn overflow:hidden im .container entfernt wird. */
+.clearfloat { /* Diese Klasse kann in einem <br />-Tag oder leeren div-Tag als letztes Element nach dem letzten fließenden div-Tag (im #container) platziert werden, wenn overflow:hidden im .container entfernt wird. */
 	clear:both;
 	height:0;
 	font-size: 1px;
@@ -84,13 +87,20 @@ a:hover, a:active, a:focus { /* Durch diese Gruppe von Selektoren wird bei Verwe
 	width: auto;
 	border-top-color: #000;
 	border-right-color: #000;
-	border-bottom-color: #000;
 	border-left-color: #000;
+	
+}
+
+.userlog{
+/*	
+	border-bottom-color: #000; 
 	border-bottom-width: 2px;
 	border-bottom-style: solid;
+	*/
+	margin-right: 10px;
 }
 .showonly {
-	width: 400px;
+	width: 420px;
 	height: 190px;
 	background-color: #C0C0C0;
 	border-radius: 10px;
@@ -300,6 +310,10 @@ a:hover, a:active, a:focus { /* Durch diese Gruppe von Selektoren wird bei Verwe
 	margin-right: auto;
 	margin-bottom: 0;
 	margin-left: auto;
+	
+	border-top-color: #000; 
+	border-top-width: 2px;
+	border-top-style: solid;
 }
 #navigationbutton {
 	font-family: Arial, Helvetica, sans-serif;
@@ -341,10 +355,55 @@ label {
 	text-align: right;
 	font-weight: bold;
 }
-bottom {
-	position:absolute;
-    bottom:25px;
-	right: 325px;
-	float:right;	
+.content right input{
+        display: inline-block;
+  		float: left;
+  		height: 250px;
 }
-
+.navigationbar ul ul {
+	float: right;
+	display: none;
+}
+.navigationbar ul li:hover >ul {
+	display: block;
+}
+.navigationbar ul:after {
+		content: ""; 
+		clear: both; 
+		display: block;
+}
+.navigationbar ul {
+	float: right;
+	list-style: none;
+	position: relative;
+	display: inline-table;
+}
+.navigationbar ul ul {
+	background: #D0D0D0; 
+	border-radius: 0px; 
+	padding: 2px;
+	position: absolute; 
+	top: 100%;
+	border-radius: 3px;
+	border-top: 2px solid #787878;
+}
+.navigationbar ul ul li input{
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	color: #000;
+	float: left;
+	font-weight: bold;
+	background-color: #A4A4A4;
+	height: 32px;
+	width: 120px;
+	border-radius: 10px;
+	border: 1px solid #C0C0C0;
+	margin: 2px;
+}
+.navigationbar ul ul li input:hover{
+	background-color: #47C824;
+}
+.align_right{
+	margin-top: 35px;
+	text-align: right;
+}

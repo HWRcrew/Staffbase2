@@ -21,7 +21,26 @@
   <!-- end .header --></div>
   
   	<!-- include the navigationbar -->
-  <jsp:directive.include file="navigationbar.jsp" />
+  	<%
+  		boolean isAdmin = false;
+  		try{
+  			isAdmin = (Boolean) request.getSession().getAttribute("admin");
+  		}catch(Exception e){}
+  		boolean isManager = (Boolean) request.getSession().getAttribute("manager");
+  		if(isManager && !isAdmin){
+  	%>
+  		<jsp:directive.include file="navigationbar.jsp" />
+  	<%
+  		}else if(isManager && isAdmin){
+  	%>
+  		<jsp:directive.include file="navigationbar_admin.jsp" />
+  	<%
+  		}else{
+  	%>
+  		<jsp:directive.include file="navigationbar_acc.jsp" />
+  	<% 
+  		} 
+  	%>
   
   <div class="content">
   
@@ -48,9 +67,9 @@
 	%>
   </table>
 	</center>
-	<bottom>
-    <input id="button" name="new_department" type="button" value="Neue Abteilung" onclick="window.location.href='<%=request.getContextPath()%>/DepartmentController?change='"/>
-    </bottom>
+		<div class="align_right">
+    		<input id="button" name="new_department" type="button" value="Neue Abteilung" onclick="window.location.href='<%=request.getContextPath()%>/DepartmentController?change='"/>
+ 		</div>
     <!-- end .content --></div>
   <!-- end .container --></div>
 </body>

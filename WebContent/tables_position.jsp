@@ -21,7 +21,26 @@
   <!-- end .header --></div>
   
   	<!-- include the navigationbar -->
-  <jsp:directive.include file="navigationbar.jsp" />
+  	<%
+  		boolean isAdmin = false;
+  		try{
+  			isAdmin = (Boolean) request.getSession().getAttribute("admin");
+  		}catch(Exception e){}
+  		boolean isManager = (Boolean) request.getSession().getAttribute("manager");
+  		if(isManager && !isAdmin){
+  	%>
+  		<jsp:directive.include file="navigationbar.jsp" />
+  	<%
+  		}else if(isManager && isAdmin){
+  	%>
+  		<jsp:directive.include file="navigationbar_admin.jsp" />
+  	<%
+  		}else{
+  	%>
+  		<jsp:directive.include file="navigationbar_acc.jsp" />
+  	<% 
+  		} 
+  	%>
   
   <div class="content">
   <center>
@@ -47,9 +66,9 @@
 	  %>
   </table>
 	</center>
-    <bottom>
-    <input id="button" name="new_position" type="button" value="Neue Stelle"  onclick="location.href='<%=request.getContextPath()%>/JobController?change='"/>
-    </bottom>
+		<div class="align_right">
+    		<input id="button" name="new_position" type="button" value="Neue Stelle" style=""  onclick="location.href='<%=request.getContextPath()%>/JobController?change='"/>
+		</div>
     <!-- end .content --></div>
   <!-- end .container --></div>
 </body>

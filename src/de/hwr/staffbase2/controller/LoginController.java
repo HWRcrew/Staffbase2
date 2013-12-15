@@ -34,7 +34,6 @@ public class LoginController extends HttpServlet {
 
 
 	private void handle(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-		request.setCharacterEncoding("UTF-8");
 		
 		boolean correct = false;
 		boolean isManager = false;
@@ -81,27 +80,32 @@ public class LoginController extends HttpServlet {
 		}
 	
 		RequestDispatcher dispatcher = null;
+		Employee emp = null;
 
 		AccountDAO accountDAO = AccountDAOFactory.getInstance().getAccountDAO();
 		Account account = AccountFactory.getInstance().getAccount();
 		account = accountDAO.find(username);
-		Employee emp = account.getEmployee();
+		if(account != null){
+			emp = account.getEmployee();
+		}else{
+			correct = false;
+		}
 
 		long id = 0;
 		if(emp != null){
 			id = emp.getId();
 		}
-
+		
 		if(correct){
 			if(id != 0){
-				dispatcher = getServletContext().getRequestDispatcher("/EmployeeController?change="+id);
-			}else if (isManager){
-				dispatcher = getServletContext().getRequestDispatcher("/ManagerController?login=1");
+				dispatcher = getServletContext().getRequestDispatcher("/settings_details.jsp?change="+id);
 			}else{
-				dispatcher = getServletContext().getRequestDispatcher("/");
+				request.getSession().setAttribute("admin", true);
+				dispatcher = getServletContext().getRequestDispatcher("/settings_manager.jsp");//("/settings_details_editable.jsp");
 			}
 			dispatcher.forward(request, response);
 		}else{
+			System.out.println("User und PW Kombi existiert nicht");
 			dispatcher = getServletContext().getRequestDispatcher("/login.jsp");
 			request.setAttribute("errorMessage", "Inkorrekte Eingabe: Nutzername oder Passwort");
 			dispatcher.forward(request, response);

@@ -15,14 +15,35 @@
   <!-- end .header --></div>
   
   	<!-- include the navigationbar -->
-  <jsp:directive.include file="navigationbar.jsp" />
+  	<%
+  		boolean isAdmin = false;
+  		try{
+  			isAdmin = (Boolean) request.getSession().getAttribute("admin");
+  		}catch(Exception e){}
+  		boolean isManager = (Boolean) request.getSession().getAttribute("manager");
+  		if(isManager && !isAdmin){
+  	%>
+  		<jsp:directive.include file="navigationbar.jsp" />
+  	<%
+  		}else if(isManager && isAdmin){
+  	%>
+  		<jsp:directive.include file="navigationbar_admin.jsp" />
+  	<%
+  		}else{
+  	%>
+  		<jsp:directive.include file="navigationbar_acc.jsp" />
+  	<% 
+  		} 
+  	%>
+  
+  <center><p>Konto bearbeiten:</p></center>
   
   <div class="content">
   
   		<center><div style="color:red">${errorMessage}</div></center>
   	
     <form id="input_login" action="" method="post" name="login" target="_self">
-   	  <center><input type="text" id="userinput" maxlength="50" placeholder="Nutzername *"/></center>
+   	  <center><input type="text" id="showonlyvalues" maxlength="50" placeholder="" value="${username}" onfocus="this.blur();"/></center>
       <center><input id="userinput" name="old_password" type="password" maxlength="50" placeholder="Altes Passwort *"/></center>
 	  <center><input id="userinput" name="new_password" type="password" maxlength="50" placeholder="Neues Passwort *"/></center>
 	  <center><input id="userinput" name="new_password_resume" type="password" maxlength="50" placeholder="Neues Passwort wiederholen *"/></center>

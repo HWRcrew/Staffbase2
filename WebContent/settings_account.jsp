@@ -14,34 +14,14 @@
     <input name="logo_staffbase" type="image" src="drawable/staffbase_logo.png" />
   <!-- end .header --></div>
   
-  	<!-- include the navigationbar -->
-  	<%
-  		boolean isAdmin = false;
-  		try{
-  			isAdmin = (Boolean) request.getSession().getAttribute("admin");
-  		}catch(Exception e){}
-  		boolean isManager = (Boolean) request.getSession().getAttribute("manager");
-  		if(isManager && !isAdmin){
-  	%>
-  		<jsp:directive.include file="navigationbar.jsp" />
-  	<%
-  		}else if(isManager && isAdmin){
-  	%>
-  		<jsp:directive.include file="navigationbar_admin.jsp" />
-  	<%
-  		}else{
-  	%>
-  		<jsp:directive.include file="navigationbar_acc.jsp" />
-  	<% 
-  		} 
-  	%>
+  	
   
   <div class="content">
   
   	<center><div style="color:red">${errorMessage}</div></center>
-  	<center><p>Neuen Mitarbeiter hinzufügen</p></center>
-    <form id="input_login" action="ManagerController?insert=1" method="post" name="login" target="_self">
-	  <center><input type="text" id="userinput" maxlength="50" name="name" value="Mitarbeiter"/></center>
+  	<center><p>Account für Mitarbeiter einrichten</p></center>
+    <form id="input_login" action="AccountController?id=<%= request.getParameter("accID") %>" method="post" name="login" target="_self">
+	  <center><input type="text" id="readonly" maxlength="50" name="id" onfocus="this.blur();" value="<%= request.getParameter("accID") %>"/></center>
    	  <center><input type="text" id="userinput" maxlength="50" name="username" placeholder="Nutzername *" value=""/></center>
 	  <center><input id="userinput" name="new_password" type="password" maxlength="50" placeholder="Neues Passwort *" value=""/></center>
 	  <center><input id="userinput" name="new_password_resume" type="password" maxlength="50" placeholder="Neues Passwort wiederholen *" value=""/></center>

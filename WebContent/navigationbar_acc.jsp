@@ -27,9 +27,6 @@
 						</ul>
 				</li>
 			</ul>
-		<input id="navigationbutton" name="employee" type="submit" value="Mitarbeiter" />
-		<input id="navigationbutton" name="department" type="submit" value="Abteilung" />
-		<input id="navigationbutton" name="place" type="submit" value="Stellen" />
 	</form>
   <!-- end .navigationbar --></div>
 

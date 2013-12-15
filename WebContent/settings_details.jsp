@@ -17,10 +17,29 @@
   <div class="header">
     <input name="logo_staffbase" type="image" src="drawable/staffbase_logo.png" />
   <!-- end .header --></div>
-  <div class="navigationbar">
-	<input id="navigationbutton" name="sign-out" type="button" value="Abmelden" style="float:right" onclick="location.href='<%=request.getContextPath()%>/LogoutController'"  /> <!-- onclick="window.location.href='login.html'" -->
-	<input id="navigationbutton" name="account" type="button" value="Konto" style="float:right; background-color: #47C824;;"  />
-  <!-- end .navigationbar --></div>
+ 	
+ 	<!-- include the navigationbar -->
+  	<%
+  		boolean isAdmin = false;
+  		try{
+  			isAdmin = (Boolean) request.getSession().getAttribute("admin");
+  		}catch(Exception e){}
+  		boolean isManager = (Boolean) request.getSession().getAttribute("manager");
+  		if(isManager && !isAdmin){
+  	%>
+  		<jsp:directive.include file="navigationbar.jsp" />
+  	<%
+  		}else if(isManager && isAdmin){
+  	%>
+  		<jsp:directive.include file="navigationbar_admin.jsp" />
+  	<%
+  		}else{
+  	%>
+  		<jsp:directive.include file="navigationbar_acc.jsp" />
+  	<% 
+  		} 
+  	%>
+ 	
   <div class="content">
   <%
   	String change = request.getParameter("change");
@@ -37,26 +56,36 @@
 		<label>ID </label>
 		<input type="text" id="readonly" name="id" readonly onfocus="this.blur();" value="<%=employee.getId()%>"/><br>
 		<label>Name </label>
-		<input id="userinputvalues" name="name" type="text" maxlength="50"  value="<%=employee.getSurname()%>"/><br>
+		<input id="userinputvalues" name="name" type="text" maxlength="50" onfocus="this.blur();"  value="<%=employee.getSurname()%>"/><br>
 		<label>Vorname </label>
-		<input id="userinputvalues" name="prename" type="text" maxlength="50" value="<%=employee.getPrename()%>"/><br>
+		<input id="userinputvalues" name="prename" type="text" maxlength="50" onfocus="this.blur();" value="<%=employee.getPrename()%>"/><br>
 		<label>Straße </label>
-		<input id="userinputvalues" name="street" type="text" maxlength="50" value="<%=employee.getStreet()%>"/><br>
+		<input id="userinputvalues" name="street" type="text" maxlength="50" onfocus="this.blur();" value="<%=employee.getStreet()%>"/><br>
 		<label>Postleitzahl </label>
-		<input id="userinputvalues" name="zipcode" type="text" maxlength="50" value="<%=employee.getZipcode()%>"/><br>
+		<input id="userinputvalues" name="zipcode" type="text" maxlength="50" onfocus="this.blur();" value="<%=employee.getZipcode()%>"/><br>
 		<label>Ort </label>
-		<input id="userinputvalues" name="city" type="text" maxlength="50" value="<%=employee.getCity()%>"/><br> 
+		<input id="userinputvalues" name="city" type="text" maxlength="50" onfocus="this.blur();" value="<%=employee.getCity()%>"/><br> 
 			<!-- show only: wages, department, place -->
+			
 			<div class="showonly">
+			
 			<label>Gehalt </label>
-			<input type="text" id="showonlyvalues" name="_salary" readonly onfocus="this.blur();" value="<%=employee.getSalary()%>"/><br>
+			<input type="text" id="showonlyvalues" name="_salary" readonly onfocus="this.blur();" value="<%=employee.getSalary() %>"/><br>
 			<label>Abteilung </label>
-			<input type="text" id="showonlyvalues" name="_department" readonly onfocus="this.blur();" value="<%=employee.getDepartment()%>"/><br>
+			<% if(employee.getDepartment() != null){ %>
+			<input type="text" id="showonlyvalues" name="_department" readonly onfocus="this.blur();" value="<%=employee.getDepartment().getName() %>"/><br>
+			<% }else{ %>
+			<input type="text" id="showonlyvalues" name="_department" readonly onfocus="this.blur();" value=""/><br>
+			<% } %>
 			<label>Stelle </label>
-			<input type="text" id="showonlyvalues" name="_job" readonly onfocus="this.blur();" value="<%=employee.getJob()%>"/><br>
+			<% if(employee.getJob() != null){ %>
+			<input type="text" id="showonlyvalues" name="_job" readonly onfocus="this.blur();" value="<%=employee.getJob().getName() %>"/><br>
+			<% }else{ %>
+			<input type="text" id="showonlyvalues" name="_job" readonly onfocus="this.blur();" value=""/><br>
+			<% } %>
 			<!-- end .showonly --></div>
-		<input id="button_large" name="submit" type="submit" value="Speichern" /><br>
-		<input id="button_large" name="edit" type="button" value="Konto bearbeiten" />
+		
+		<input id="button_large" name="edit" type="submit" value="Konto bearbeiten" />
     </form>
     <!-- end .content --></div>
   <!-- end .container --></div>

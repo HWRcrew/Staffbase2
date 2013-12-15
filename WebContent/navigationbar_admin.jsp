@@ -17,19 +17,7 @@
   	<form action="NavigationController" method="post" name="navigation">
   		  
 		<input id="navigationbutton" name="sign-out" type="submit" value="Abmelden" style="float:right" /> <!-- onclick="window.location.href='login.html'" -->
-			<ul>
-				<li>
-					<input id="navigationbutton" name="account" type="button" value="Konto" style="float:right; background-color: #47C824"  /> <!-- ; color: #AC58FA" -->
-						<ul>
-							<li><input type="submit" name="profile_my" value="Mein Profil" style="floar:right"/></li>
-							<li><input type="submit" name="profile_edit" value="Profil bearbeiten" style="floar:right"/></li>
-							<li><input type="submit" name="profile_settings" value="Konto bearbeiten" style="floar:right"/></li>
-						</ul>
-				</li>
-			</ul>
-		<input id="navigationbutton" name="employee" type="submit" value="Mitarbeiter" />
-		<input id="navigationbutton" name="department" type="submit" value="Abteilung" />
-		<input id="navigationbutton" name="place" type="submit" value="Stellen" />
+		
 	</form>
   <!-- end .navigationbar --></div>
 

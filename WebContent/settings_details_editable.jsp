@@ -28,9 +28,30 @@
   <!-- end .header --></div>
   
   	<!-- include the navigationbar -->
-  <jsp:directive.include file="navigationbar.jsp" />
+  	<%
+  		boolean isAdmin = false;
+  		try{
+  			isAdmin = (Boolean) request.getSession().getAttribute("admin");
+  		}catch(Exception e){}
+  		boolean isManager = (Boolean) request.getSession().getAttribute("manager");
+  		if(isManager && !isAdmin){
+  	%>
+  		<jsp:directive.include file="navigationbar.jsp" />
+  	<%
+  		}else if(isManager && isAdmin){
+  	%>
+  		<jsp:directive.include file="navigationbar_admin.jsp" />
+  	<%
+  		}else{
+  	%>
+  		<jsp:directive.include file="navigationbar_acc.jsp" />
+  	<% 
+  		} 
+  	%>
   
   <div class="content">
+  
+ 	 
   
   	<center><div style="color:red">${errorMessage}</div></center>
   
@@ -47,6 +68,8 @@
 	employee = employeeDAO.find(changelong);
 	
   %>
+  
+  <center>Mitarbeiterprofil bearbeiten:</center>
   
   <center>
     <form id="input_update" action="EmployeeController?update=1" method="post" name="login">
@@ -66,7 +89,7 @@
 		<input type="text" id="userinputvalues" name="salary" value="<%=employee.getSalary()%>"/><br>
 		<label>Abteilung* </label>
 		<% if(employee.getDepartment() != null && !"1".equalsIgnoreCase(edit)){ %>
-		<input type="text" id="userinputvalues" readonly="readonly" name="department" value="<%=employee.getDepartment().getName()%>"/><br>
+		<input type="text" id="userinputvalues" name="department" value="<%=employee.getDepartment().getName()%>"/><br>
 		<%}else{
 			DepartmentDAO departmentDAO = DepartmentDAOFactory.getInstance().getDepartmentDAO();
 			List<Department> department = departmentDAO.find();
@@ -79,7 +102,7 @@
 		<%} %>
 		<label>Stelle* </label>
 		<%if(employee.getJob() != null && !"1".equalsIgnoreCase(edit)){ %>		
-		<input type="text" id="userinputvalues" readonly="readonly" name="job" value="<%=employee.getJob().getName()%>"/><br>
+		<input type="text" id="userinputvalues" name="job" value="<%=employee.getJob().getName()%>"/><br>
 		<%}else{ 
 		JobDAO jobDAO = JobDAOFactory.getInstance().getJobDAO();
 		List<Job> job = jobDAO.find();
@@ -92,11 +115,13 @@
 		<%} %>
 		<input id="button_large" name="submit" type="submit" value="Speichern" /><br>
     	</form>
-    	<input id="button_large" name="edit" type="button" value="Konto bearbeiten" onclick="location.href='<%=request.getContextPath()%>/EmployeeController?change=<%=employee.getId()%>&edit=1'" />
+ <!--    	<input id="button_large" name="edit" type="button" value="Konto bearbeiten" onclick="location.href='<%=request.getContextPath()%>/EmployeeController?change=<%=employee.getId()%>&edit=1'" />   -->
 			
 			<%
   	}else{
 			%>
+			
+			<center>Neuen Mitarbeiter anlegen:</center>
 	<center>
     <form id="input_insert" action="EmployeeController?insert=1" method="post" >
 		<label>ID </label>

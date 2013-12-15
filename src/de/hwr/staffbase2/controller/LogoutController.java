@@ -21,7 +21,7 @@ public class LogoutController extends HttpServlet {
      */
 	
 	private void handle(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
+
 			request.getSession().removeAttribute("username");
 			request.getSession().removeAttribute("password");
 			request.getSession().removeAttribute("manager");
