@@ -62,6 +62,8 @@
 		<input id="userinputvalues" name="salary" type="text" maxlength="50" value="<%=job.getSalary()%>"/><br>
 		<label>Beschreibung* </label>
 		<textarea id="userinputvalues_rich" name="description" cols="25" rows="5" ><%=job.getDescription()%></textarea><br>
+		<input id="button_large" name="submit" type="submit" value="Speichern" /><br>
+		</form>
 	<%
   }else{
 	  
@@ -75,11 +77,12 @@
 		<input id="userinputvalues" name="salary" type="text" maxlength="50" value='${salary}'/><br>
 		<label>Beschreibung* </label>
 		<textarea id="userinputvalues_rich" name="description" cols="25" rows="5" >${description}</textarea><br>
-	<%
-  }
-	%>	
+		
 		<input id="button_large" name="submit" type="submit" value="Speichern" /><br>
     </form>
+    <%
+  }
+	%>
 	</center>
     <!-- end .content --></div>
   <!-- end .container --></div>

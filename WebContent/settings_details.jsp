@@ -52,7 +52,7 @@
   %>
   
   <center>
-    <form id="input_login" action="EmployeeController?update=1" method="post" name="login">
+    <form id="input_login" action="EmployeeController?edit=1" method="post" name="login">
 		<label>ID </label>
 		<input type="text" id="readonly" name="id" readonly onfocus="this.blur();" value="<%=employee.getId()%>"/><br>
 		<label>Name </label>

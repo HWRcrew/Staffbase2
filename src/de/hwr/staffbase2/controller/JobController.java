@@ -31,6 +31,7 @@ public class JobController extends HttpServlet {
 		RequestDispatcher dispatcher = null;
 		String insert = request.getParameter("insert");
 		String change = request.getParameter("change");
+		String update = request.getParameter("update");
 		
 		if(change != null){
 			dispatcher = getServletContext().getRequestDispatcher("/settings_position_editable.jsp");
@@ -66,7 +67,59 @@ public class JobController extends HttpServlet {
 			jobDAO.insert(job);
 			
 			
-			dispatcher = getServletContext().getRequestDispatcher("/JobController?change="+job.getId());
+			dispatcher = getServletContext().getRequestDispatcher("/tables_position.jsp");
+			
+			}else{
+				request.setAttribute("errorMessage", "Inkorrekte Eingabe: Alle Pflichtfelder müssen eingetragen sein.");
+				request.setAttribute("name", name);
+				request.setAttribute("description", description);
+				request.setAttribute("salary", salarystring);
+				dispatcher = getServletContext().getRequestDispatcher("/JobController?change=");
+			}
+			
+			
+			
+		}else if("1".equalsIgnoreCase(update)){
+			
+			String name = request.getParameter("name");
+			String salarystring = request.getParameter("salary");
+			String description = request.getParameter("description");
+			String mID = request.getParameter("_id");
+			
+			long _id = 0;
+			if(mID != null){
+			_id = Long.parseLong(mID);
+			}
+			
+			
+			if(checkValues(name, salarystring, description)){
+				float salary = 0;
+				try{
+					salary = Float.parseFloat(salarystring);
+				}catch(Exception e){
+					request.setAttribute("errorMessage", "Inkorrekte Eingabe: In dem Feld Gehalt muss eine Zahl sein.");
+					request.setAttribute("name", name);
+					request.setAttribute("description", description);
+					dispatcher = getServletContext().getRequestDispatcher("/JobController?change=");
+					dispatcher.forward(request, response);
+					return;
+				}
+			
+			
+							
+			JobDAO jobDAO = JobDAOFactory.getInstance().getJobDAO();
+			Job job = JobFactory.getInstance().getJob();
+			
+			job = jobDAO.find(_id);
+			
+			job.setDescription(description);
+			job.setName(name);
+			job.setSalary(salary);
+			
+			jobDAO.update(job);
+			
+			
+			dispatcher = getServletContext().getRequestDispatcher("/tables_position.jsp");
 			
 			}else{
 				request.setAttribute("errorMessage", "Inkorrekte Eingabe: Alle Pflichtfelder müssen eingetragen sein.");

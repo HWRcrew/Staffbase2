@@ -38,6 +38,7 @@ public class EmployeeController extends HttpServlet {
 		String change = request.getParameter("change");
 		String insert = request.getParameter("insert");
 		String update = request.getParameter("update");
+		String edit = request.getParameter("edit");
 
 		if(change != null){
 			dispatcher = getServletContext().getRequestDispatcher("/settings_details_editable.jsp?edit=1");
@@ -138,7 +139,7 @@ public class EmployeeController extends HttpServlet {
 	
 				employeeDAO.update(employee);
 				
-				dispatcher = getServletContext().getRequestDispatcher("/EmployeeController?change="+id);
+				dispatcher = getServletContext().getRequestDispatcher("/settings_details.jsp?change="+id);
 								
 			}else if("1".equalsIgnoreCase(insert)){
 				
@@ -246,6 +247,16 @@ public class EmployeeController extends HttpServlet {
 					dispatcher = getServletContext().getRequestDispatcher("/EmployeeController?change=");
 				}
 				
+				
+			}else if("1".equalsIgnoreCase(edit)){
+				
+				String mID = request.getParameter("id");
+				long _id = 0;
+				if(mID != null){
+					_id = Long.parseLong(mID);
+				}
+				
+				dispatcher = getServletContext().getRequestDispatcher("/EmployeeController?change="+_id);
 				
 			}else{
 				

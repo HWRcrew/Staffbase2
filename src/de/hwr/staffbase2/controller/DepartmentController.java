@@ -51,7 +51,7 @@ public class DepartmentController extends HttpServlet {
 			 
 			 departmentDAO.update(department);
 			 
-			 dispatcher = getServletContext().getRequestDispatcher("/DepartmentController?change="+id);
+			 dispatcher = getServletContext().getRequestDispatcher("/tables_department.jsp");
 			 
 			}else{
 				request.setAttribute("errorMessage", "Inkorrekte Eingabe: Alle Pflichtfelder müssen eingetragen sein.");
@@ -73,7 +73,7 @@ public class DepartmentController extends HttpServlet {
 			 
 			 departmentDAO.insert(department);
 			 
-			 dispatcher = getServletContext().getRequestDispatcher("/DepartmentController?change="+department.getId());
+			 dispatcher = getServletContext().getRequestDispatcher("/tables_department.jsp");
 			 
 			}else{
 				request.setAttribute("errorMessage", "Inkorrekte Eingabe: Alle Pflichtfelder müssen eingetragen sein.");
