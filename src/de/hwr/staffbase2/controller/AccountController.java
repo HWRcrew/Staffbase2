@@ -39,8 +39,55 @@ public class AccountController extends HttpServlet{
 		}else{
 			manager = true;
 		}
-		long id = Long.parseLong(idString);
+		long id = 0;
+		if(idString != null){
+		id = Long.parseLong(idString);
+		}
 		RequestDispatcher dispatcher = null;
+		
+		// change the password of user
+		if(request.getParameter("pwedit").equals("1")){
+			
+			if(checkValues(username, pw1, pw2)){
+				
+				if(pw1.equals(pw2)){
+					
+					String pw_old = request.getParameter("old_password");
+					
+					AccountDAO accountDAO = AccountDAOFactory.getInstance().getAccountDAO();
+					Account account = AccountFactory.getInstance().getAccount();
+					account = accountDAO.find(username, pw_old);
+					
+					if(account != null){
+						
+						account.setPassword(pw1);
+						accountDAO.update(account);
+						
+						Employee employee = account.getEmployee();
+						long emp_id = employee.getId();
+						
+						dispatcher = getServletContext().getRequestDispatcher("/settings_details.jsp?change="+emp_id);
+						
+					}else{
+						request.setAttribute("errorMessage", "Inkorrekte Eingabe: Aktuelles Passwort wurde falsch eingetragen.");
+						dispatcher = getServletContext().getRequestDispatcher("/settings.jsp?username="+username);
+						dispatcher.forward(request, response);
+						return;
+					}
+			
+				}else{
+					request.setAttribute("errorMessage", "Inkorrekte Eingabe: Die beiden Passwörter stimmen nicht überein.");
+					dispatcher = getServletContext().getRequestDispatcher("/settings.jsp?username="+username);
+					dispatcher.forward(request, response);
+					return;
+				}
+		
+			}else{
+				request.setAttribute("errorMessage", "Inkorrekte Eingabe: Alle Pflichtfelder müssen eingetragen sein.");
+				dispatcher = getServletContext().getRequestDispatcher("/settings.jsp?username="+username);
+			}
+			
+		}else{// insert new account
 		
 		if(checkValues(username, pw1, pw2)){
 			
@@ -74,6 +121,7 @@ public class AccountController extends HttpServlet{
 		}else{
 			request.setAttribute("errorMessage", "Inkorrekte Eingabe: Alle Pflichtfelder müssen eingetragen sein.");
 			dispatcher = getServletContext().getRequestDispatcher("/settings_account.jsp?accID="+id);
+		}
 		}
 		
 		dispatcher.forward(request, response);
