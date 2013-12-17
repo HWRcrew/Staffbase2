@@ -31,6 +31,8 @@ public class ManagerController extends HttpServlet {
    
 	private void handle(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		
+		request.setCharacterEncoding("UTF-8");
+		
 		final String login = request.getParameter("login");
 		final String insert = request.getParameter("insert");
 		RequestDispatcher dispatcher = null;

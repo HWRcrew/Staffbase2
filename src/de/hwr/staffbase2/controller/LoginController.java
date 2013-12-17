@@ -34,6 +34,7 @@ public class LoginController extends HttpServlet {
 
 
 	private void handle(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+		request.setCharacterEncoding("UTF-8");
 		
 		boolean correct = false;
 		boolean isManager = false;
