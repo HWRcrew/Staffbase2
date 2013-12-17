@@ -139,24 +139,7 @@ public class EmployeeController extends HttpServlet {
 				employeeDAO.update(employee);
 				
 				dispatcher = getServletContext().getRequestDispatcher("/EmployeeController?change="+id);
-				
-				
-	/*			}else{
-					request.setAttribute("errorMessage", "Inkorrekte Eingabe: Alle Pflichtfelder müssen eingetragen sein.");
-					request.setAttribute("name", name);
-					request.setAttribute("prename", prename);
-					request.setAttribute("street", street);
-					request.setAttribute("zipcode", zipcodestr);
-					request.setAttribute("city", city);
-		//			request.setAttribute("selectdeparment", department);
-		//			request.setAttribute("selectjob", job);
-					request.setAttribute("salary", salary);
-					
-					
-					dispatcher = getServletContext().getRequestDispatcher("/EmployeeController?change=");
-				}*/
-				
-				
+								
 			}else if("1".equalsIgnoreCase(insert)){
 				
 				String name = request.getParameter("name");
@@ -257,8 +240,6 @@ public class EmployeeController extends HttpServlet {
 					request.setAttribute("street", street);
 					request.setAttribute("zipcode", zipcodestr);
 					request.setAttribute("city", city);
-		//			request.setAttribute("selectdeparment", department);
-		//			request.setAttribute("selectjob", job);
 					request.setAttribute("salary", salary);
 					
 					

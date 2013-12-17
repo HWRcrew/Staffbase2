@@ -86,15 +86,15 @@
 		<label>Ort* </label>
 		<input id="userinputvalues" name="city" type="text" maxlength="50" value="<%=employee.getCity()%>"/><br> 
 		<label>Gehalt* </label>
-		<input type="text" id="userinputvalues" name="salary" value="<%=employee.getSalary()%>"/><br>
+		<input type="text" id="userinputvalues" name="salary" value="<%=employee.getSalary()%>" onfocus="<% if(!((Boolean) request.getSession().getAttribute("manager"))){%> this.blur(); <%} %>"/><br>
 		<label>Abteilung* </label>
 		<% if(employee.getDepartment() != null && !"1".equalsIgnoreCase(edit)){ %>
-		<input type="text" id="userinputvalues" name="department" value="<%=employee.getDepartment().getName()%>"/><br>
+		<input type="text" id="userinputvalues" name="department" value="<%=employee.getDepartment().getName()%>" onfocus="<% if(!((Boolean) request.getSession().getAttribute("manager"))){%> this.blur(); <%} %>"/><br>
 		<%}else{
 			DepartmentDAO departmentDAO = DepartmentDAOFactory.getInstance().getDepartmentDAO();
 			List<Department> department = departmentDAO.find();
 		%>
-		<select name="selectdeparment" id="userinputvalues">
+		<select name="selectdeparment" id="userinputvalues" onfocus="<% if(!((Boolean) request.getSession().getAttribute("manager"))){%> this.blur(); <%} %>">
 			<%for(Department d : department){ %>
 			<option value="<%=d.getId()%>"><%=d.getName() %></option>
 			<%} %>
@@ -102,12 +102,12 @@
 		<%} %>
 		<label>Stelle* </label>
 		<%if(employee.getJob() != null && !"1".equalsIgnoreCase(edit)){ %>		
-		<input type="text" id="userinputvalues" name="job" value="<%=employee.getJob().getName()%>"/><br>
+		<input type="text" id="userinputvalues" name="job" value="<%=employee.getJob().getName()%>" onfocus="<% if(!((Boolean) request.getSession().getAttribute("manager"))){%> this.blur(); <%} %>"/><br>
 		<%}else{ 
 		JobDAO jobDAO = JobDAOFactory.getInstance().getJobDAO();
 		List<Job> job = jobDAO.find();
 		%>
-		<select name="selectjob" id="userinputvalues">
+		<select name="selectjob" id="userinputvalues" onfocus="<% if(!((Boolean) request.getSession().getAttribute("manager"))){%> this.blur(); <%} %>">
 			<%for(Job j : job){ %>
 			<option value="<%=j.getId()%>"><%=j.getName() %></option>
 			<%} %>
