@@ -45,6 +45,9 @@ a:hover, a:active, a:focus { /* Durch diese Gruppe von Selektoren wird bei Verwe
 	margin-right: auto;
 	margin-bottom: 0;
 	margin-left: auto;
+	-moz-box-shadow:    3px 3px 5px 6px #0d0d0c;
+  	-webkit-box-shadow: 3px 3px 5px 6px #0d0d0c;
+  	box-shadow:         3px 3px 5px 6px #0d0d0c;
 }
 
 /* ~~ Dies sind die Layoutinformationen. ~~ 
