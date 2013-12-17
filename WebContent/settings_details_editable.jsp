@@ -69,7 +69,7 @@
 	
   %>
   
-  <center>Mitarbeiterprofil bearbeiten:</center>
+  <mCenter>Mitarbeiterprofil bearbeiten:</mCenter><!-- mCenter because of the labels ~ margin-left : 45% -->
   
   <center>
     <form id="input_update" action="EmployeeController?update=1" method="post" name="login">
@@ -121,7 +121,7 @@
   	}else{
 			%>
 			
-			<center>Neuen Mitarbeiter anlegen:</center>
+			<mCenter>Neuen Mitarbeiter anlegen:</mCenter><!-- mCenter because of the labels ~ margin-left : 45% -->
 	<center>
     <form id="input_insert" action="EmployeeController?insert=1" method="post" >
 		<label>ID </label>

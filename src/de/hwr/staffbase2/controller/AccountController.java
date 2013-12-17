@@ -46,7 +46,7 @@ public class AccountController extends HttpServlet{
 		RequestDispatcher dispatcher = null;
 		
 		// change the password of user
-		if(request.getParameter("pwedit").equals("1")){
+		if(request.getParameter("pwedit") != null && request.getParameter("pwedit").equals("1")){
 			
 			if(checkValues(username, pw1, pw2)){
 				
